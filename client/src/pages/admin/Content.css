@@ -1,0 +1,252 @@
+/* Content Page Styles */
+/* =================== */
+
+.content-page {
+  color: #ffffff;
+}
+
+/* Page Header */
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.header-content h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.header-content p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+}
+
+/* Content Grid */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Content Card */
+.content-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.content-card:hover {
+  border-color: rgba(212, 175, 125, 0.3);
+  transform: translateY(-2px);
+}
+
+.card-header {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(212, 175, 125, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card-icon i {
+  font-size: 1.25rem;
+  color: #d4af7d;
+}
+
+.card-title h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.card-title p {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Content Items List */
+.content-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.content-items li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.content-items li i {
+  color: #4ecdc4;
+  font-size: 0.75rem;
+}
+
+/* Content Count */
+.content-count {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.content-count .count {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #d4af7d;
+}
+
+.content-count .label {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Card Footer */
+.card-footer {
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.edit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(212, 175, 125, 0.1);
+  border: 1px solid rgba(212, 175, 125, 0.2);
+  border-radius: 10px;
+  color: #d4af7d;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-btn:hover {
+  background: rgba(212, 175, 125, 0.2);
+  border-color: rgba(212, 175, 125, 0.4);
+}
+
+/* Content Stats */
+.content-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.stat-item > i {
+  font-size: 1.5rem;
+  color: rgba(212, 175, 125, 0.5);
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Coming Soon Card */
+.coming-soon-card {
+  background: linear-gradient(135deg, rgba(155, 123, 184, 0.1), rgba(212, 175, 125, 0.1));
+  border: 1px solid rgba(155, 123, 184, 0.2);
+  border-radius: 15px;
+  padding: 1.5rem;
+}
+
+.coming-soon-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.coming-soon-content > i {
+  font-size: 2rem;
+  color: #9b7bb8;
+}
+
+.coming-soon-content h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.coming-soon-content p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+  .content-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .content-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .content-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .coming-soon-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
