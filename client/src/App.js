@@ -8,10 +8,12 @@ import Services from './pages/Services';
 import Sanctuary from './pages/Sanctuary';
 import Book from './pages/Book';
 import Contact from './pages/Contact';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
