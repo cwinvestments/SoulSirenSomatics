@@ -1,0 +1,362 @@
+/* My Scans Styles */
+/* ================ */
+
+.my-scans {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Page Header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.header-content h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #2a1f35;
+  margin-bottom: 0.25rem;
+}
+
+.header-content p {
+  color: #6b5b7a;
+  font-size: 1rem;
+}
+
+.request-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #d4af7d, #e8c9a0);
+  border-radius: 25px;
+  color: #2a1f35;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.request-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(212, 175, 125, 0.3);
+}
+
+/* Info Banner */
+.info-banner {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: rgba(155, 123, 184, 0.1);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.info-banner > i {
+  color: #9b7bb8;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.info-banner p {
+  font-size: 0.9rem;
+  color: #6b5b7a;
+  line-height: 1.5;
+}
+
+/* Scans List */
+.scans-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Scan Card */
+.scan-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.scan-card.expanded {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.scan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.scan-header:hover {
+  background: #faf8f6;
+}
+
+.scan-info {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.scan-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, rgba(155, 123, 184, 0.15), rgba(212, 175, 125, 0.15));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.scan-icon i {
+  font-size: 1.25rem;
+  color: #9b7bb8;
+}
+
+.scan-details h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #2a1f35;
+  margin-bottom: 0.25rem;
+}
+
+.scan-date {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: #6b5b7a;
+}
+
+.scan-date i {
+  font-size: 0.75rem;
+}
+
+.scan-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status-badge.ready {
+  background: rgba(78, 205, 196, 0.15);
+  color: #4ecdc4;
+}
+
+.status-badge.pending {
+  background: rgba(255, 193, 7, 0.15);
+  color: #ffc107;
+}
+
+.expand-btn {
+  width: 36px;
+  height: 36px;
+  background: #f8f5f2;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.expand-btn:hover {
+  background: #f0ebe5;
+}
+
+.expand-btn i {
+  color: #6b5b7a;
+}
+
+/* Scan Summary (for old scans) */
+.scan-summary {
+  padding: 1rem 1.5rem;
+  background: #faf8f6;
+  border-top: 1px solid rgba(42, 31, 53, 0.05);
+}
+
+.scan-summary p {
+  font-size: 0.9rem;
+  color: #6b5b7a;
+  font-style: italic;
+}
+
+/* Scan Report */
+.scan-report {
+  padding: 1.5rem;
+  background: #faf8f6;
+  border-top: 1px solid rgba(42, 31, 53, 0.05);
+}
+
+.report-section {
+  background: white;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.report-section:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.section-header i {
+  width: 30px;
+  height: 30px;
+  background: rgba(212, 175, 125, 0.15);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d4af7d;
+  font-size: 0.85rem;
+}
+
+.section-header h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2a1f35;
+}
+
+.section-status {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  background: rgba(155, 123, 184, 0.1);
+  color: #9b7bb8;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.section-details {
+  font-size: 0.95rem;
+  color: #6b5b7a;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.section-recommendation {
+  font-size: 0.9rem;
+  color: #2a1f35;
+  padding: 0.75rem;
+  background: rgba(212, 175, 125, 0.1);
+  border-radius: 8px;
+  border-left: 3px solid #d4af7d;
+}
+
+.section-recommendation strong {
+  color: #d4af7d;
+}
+
+/* Focus Section */
+.focus-section {
+  background: linear-gradient(135deg, rgba(212, 175, 125, 0.1), rgba(155, 123, 184, 0.1));
+}
+
+.focus-section .section-header i {
+  background: rgba(212, 175, 125, 0.25);
+}
+
+.focus-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.focus-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(42, 31, 53, 0.05);
+  font-size: 0.95rem;
+  color: #2a1f35;
+}
+
+.focus-list li:last-child {
+  border-bottom: none;
+}
+
+.focus-list li i {
+  color: #4ecdc4;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+/* Report Disclaimer */
+.report-disclaimer {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(255, 193, 7, 0.1);
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+.report-disclaimer i {
+  color: #ffc107;
+  flex-shrink: 0;
+}
+
+.report-disclaimer p {
+  font-size: 0.8rem;
+  color: #6b5b7a;
+  line-height: 1.4;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .request-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .scan-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .scan-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

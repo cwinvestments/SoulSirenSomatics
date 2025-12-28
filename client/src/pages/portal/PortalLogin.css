@@ -1,0 +1,263 @@
+/* Portal Login Styles */
+/* =================== */
+
+.portal-login-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2a1f35 0%, #1a1225 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-family: 'Raleway', sans-serif;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 440px;
+}
+
+.back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  transition: color 0.2s ease;
+}
+
+.back-home:hover {
+  color: #d4af7d;
+}
+
+.login-card {
+  background: white;
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Login Header */
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-logo {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, rgba(212, 175, 125, 0.15), rgba(155, 123, 184, 0.15));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-logo i {
+  font-size: 2rem;
+  color: #d4af7d;
+}
+
+.login-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #2a1f35;
+  margin-bottom: 0.5rem;
+}
+
+.login-header p {
+  color: #6b5b7a;
+  font-size: 0.95rem;
+}
+
+/* Error Message */
+.login-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: rgba(233, 69, 96, 0.1);
+  border: 1px solid rgba(233, 69, 96, 0.2);
+  border-radius: 12px;
+  color: #e94560;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Login Form */
+.login-form {
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: #2a1f35;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9b7bb8;
+  font-size: 0.9rem;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 2.75rem;
+  background: #f8f5f2;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  color: #2a1f35;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.input-wrapper input::placeholder {
+  color: #9b7bb8;
+}
+
+.input-wrapper input:focus {
+  outline: none;
+  border-color: #d4af7d;
+  background: white;
+}
+
+/* Form Options */
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #6b5b7a;
+}
+
+.remember-me input {
+  accent-color: #d4af7d;
+}
+
+.forgot-link {
+  color: #d4af7d;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.forgot-link:hover {
+  color: #9b7bb8;
+}
+
+/* Login Button */
+.login-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #d4af7d, #e8c9a0);
+  border: none;
+  border-radius: 12px;
+  color: #2a1f35;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(212, 175, 125, 0.4);
+}
+
+.login-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Login Footer */
+.login-footer {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(42, 31, 53, 0.1);
+}
+
+.login-footer p {
+  color: #6b5b7a;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.register-link {
+  color: #d4af7d;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.register-link:hover {
+  color: #9b7bb8;
+}
+
+/* Help Text */
+.login-help {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.login-help p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+}
+
+.login-help a {
+  color: #d4af7d;
+  text-decoration: none;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .portal-login-page {
+    padding: 1rem;
+  }
+
+  .login-card {
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
+
+  .login-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .form-options {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+}

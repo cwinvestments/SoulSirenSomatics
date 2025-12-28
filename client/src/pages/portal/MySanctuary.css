@@ -1,0 +1,556 @@
+/* My Sanctuary Styles */
+/* =================== */
+
+.my-sanctuary {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ====================== */
+/* Non-Member View */
+/* ====================== */
+.my-sanctuary.not-member {
+  text-align: center;
+}
+
+.locked-header {
+  padding: 3rem 1rem;
+}
+
+.locked-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, rgba(155, 123, 184, 0.15), rgba(212, 175, 125, 0.15));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.locked-icon i {
+  font-size: 2rem;
+  color: #9b7bb8;
+}
+
+.locked-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.25rem;
+  font-weight: 500;
+  color: #2a1f35;
+  margin-bottom: 0.5rem;
+}
+
+.locked-header p {
+  font-size: 1.1rem;
+  color: #6b5b7a;
+}
+
+/* Benefits Preview */
+.benefits-preview {
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(155, 123, 184, 0.1), rgba(212, 175, 125, 0.1));
+  border-radius: 20px;
+  margin-bottom: 2rem;
+}
+
+.benefits-preview h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  color: #2a1f35;
+  margin-bottom: 1.5rem;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.benefit-item {
+  text-align: center;
+}
+
+.benefit-item i {
+  font-size: 1.5rem;
+  color: #9b7bb8;
+  margin-bottom: 0.75rem;
+}
+
+.benefit-item h3 {
+  font-size: 1rem;
+  color: #2a1f35;
+  margin-bottom: 0.25rem;
+}
+
+.benefit-item p {
+  font-size: 0.85rem;
+  color: #6b5b7a;
+}
+
+/* Tiers Section */
+.tiers-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  color: #2a1f35;
+  margin-bottom: 1.5rem;
+}
+
+.tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.tier-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.tier-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.tier-card.popular {
+  border: 2px solid #d4af7d;
+}
+
+.popular-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #d4af7d, #e8c9a0);
+  color: #2a1f35;
+  padding: 0.35rem 1rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.tier-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tier-price {
+  margin-bottom: 1.5rem;
+}
+
+.tier-price .price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2a1f35;
+}
+
+.tier-price .period {
+  color: #6b5b7a;
+}
+
+.tier-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  text-align: left;
+}
+
+.tier-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #2a1f35;
+}
+
+.tier-features li i {
+  color: #4ecdc4;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.join-btn {
+  display: block;
+  width: 100%;
+  padding: 0.9rem;
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.join-btn.primary {
+  background: linear-gradient(135deg, #d4af7d, #e8c9a0);
+  color: #2a1f35;
+}
+
+.join-btn.primary:hover {
+  box-shadow: 0 5px 20px rgba(212, 175, 125, 0.3);
+}
+
+.join-btn.secondary {
+  background: #f8f5f2;
+  color: #2a1f35;
+}
+
+.join-btn.secondary:hover {
+  background: #f0ebe5;
+}
+
+/* ====================== */
+/* Member View */
+/* ====================== */
+.my-sanctuary.is-member {
+  text-align: left;
+}
+
+.sanctuary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.sanctuary-header .header-content h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #2a1f35;
+  margin-bottom: 0.25rem;
+}
+
+.sanctuary-header .header-content p {
+  color: #6b5b7a;
+}
+
+.tier-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.tier-badge.tier-observer {
+  background: rgba(180, 180, 180, 0.15);
+  color: #888;
+}
+
+.tier-badge.tier-member {
+  background: rgba(212, 175, 125, 0.15);
+  color: #d4af7d;
+}
+
+.tier-badge.tier-inner-circle {
+  background: rgba(155, 123, 184, 0.15);
+  color: #9b7bb8;
+}
+
+/* Section Styles */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.section-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #2a1f35;
+}
+
+.section-header h2 i {
+  color: #d4af7d;
+}
+
+/* Filter Tabs */
+.filter-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-tab {
+  padding: 0.5rem 1rem;
+  background: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #6b5b7a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-tab:hover {
+  background: #f8f5f2;
+}
+
+.filter-tab.active {
+  background: #2a1f35;
+  color: white;
+}
+
+/* Upcoming Lives */
+.upcoming-section {
+  margin-bottom: 2rem;
+}
+
+.lives-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.live-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.live-info h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  color: #2a1f35;
+  margin-bottom: 0.5rem;
+}
+
+.live-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.live-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: #6b5b7a;
+}
+
+.live-meta i {
+  font-size: 0.75rem;
+  color: #9b7bb8;
+}
+
+.live-host {
+  font-size: 0.8rem;
+  color: #d4af7d;
+  font-weight: 500;
+}
+
+.calendar-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: #f8f5f2;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #2a1f35;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.calendar-btn:hover {
+  background: #f0ebe5;
+}
+
+/* Resources */
+.resources-section {
+  margin-bottom: 2rem;
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.resource-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.resource-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.resource-thumbnail {
+  height: 100px;
+  background: linear-gradient(135deg, rgba(155, 123, 184, 0.3), rgba(212, 175, 125, 0.3));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resource-thumbnail i {
+  font-size: 2rem;
+  color: white;
+}
+
+.resource-info {
+  padding: 1rem;
+}
+
+.resource-category {
+  font-size: 0.75rem;
+  color: #9b7bb8;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.resource-info h3 {
+  font-size: 0.95rem;
+  color: #2a1f35;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.resource-duration {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: #6b5b7a;
+}
+
+/* Community Section */
+.community-section {
+  margin-bottom: 1rem;
+}
+
+.community-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(155, 123, 184, 0.15), rgba(212, 175, 125, 0.15));
+  border-radius: 16px;
+}
+
+.community-icon {
+  width: 70px;
+  height: 70px;
+  background: rgba(155, 123, 184, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.community-icon i {
+  font-size: 1.75rem;
+  color: #9b7bb8;
+}
+
+.community-content {
+  flex: 1;
+}
+
+.community-content h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  color: #2a1f35;
+  margin-bottom: 0.25rem;
+}
+
+.community-content p {
+  font-size: 0.9rem;
+  color: #6b5b7a;
+  margin-bottom: 1rem;
+}
+
+.community-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: #9b7bb8;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.community-btn:hover {
+  background: #8a6aa7;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .tiers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lives-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .live-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .calendar-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .resources-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .community-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .filter-tabs {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .resources-grid {
+    grid-template-columns: 1fr;
+  }
+}

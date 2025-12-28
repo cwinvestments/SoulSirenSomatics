@@ -1,0 +1,368 @@
+/* My Bookings Styles */
+/* =================== */
+
+.my-bookings {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Page Header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.header-content h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #2a1f35;
+  margin-bottom: 0.25rem;
+}
+
+.header-content p {
+  color: #6b5b7a;
+  font-size: 1rem;
+}
+
+.book-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #d4af7d, #e8c9a0);
+  border-radius: 25px;
+  color: #2a1f35;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.book-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(212, 175, 125, 0.3);
+}
+
+/* Booking Tabs */
+.booking-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: white;
+  border: 2px solid transparent;
+  border-radius: 25px;
+  color: #6b5b7a;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  background: #f8f5f2;
+}
+
+.tab-btn.active {
+  background: #2a1f35;
+  color: white;
+}
+
+.tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  background: #d4af7d;
+  border-radius: 11px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #2a1f35;
+}
+
+.tab-btn.active .tab-count {
+  background: white;
+}
+
+/* Bookings List */
+.bookings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* Booking Card */
+.booking-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.booking-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.booking-service {
+  display: flex;
+  gap: 1rem;
+}
+
+.service-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, rgba(212, 175, 125, 0.15), rgba(155, 123, 184, 0.15));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.service-icon i {
+  font-size: 1.25rem;
+  color: #d4af7d;
+}
+
+.service-info h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #2a1f35;
+  margin-bottom: 0.5rem;
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status-badge.confirmed {
+  background: rgba(78, 205, 196, 0.15);
+  color: #4ecdc4;
+}
+
+.status-badge.completed {
+  background: rgba(76, 175, 80, 0.15);
+  color: #4caf50;
+}
+
+.status-badge.cancelled {
+  background: rgba(233, 69, 96, 0.15);
+  color: #e94560;
+}
+
+/* Date Time */
+.booking-datetime {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: right;
+}
+
+.datetime-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  color: #6b5b7a;
+  font-size: 0.9rem;
+}
+
+.datetime-item i {
+  color: #9b7bb8;
+  font-size: 0.85rem;
+}
+
+/* Booking Actions */
+.booking-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(42, 31, 53, 0.1);
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  border: none;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #d4af7d, #e8c9a0);
+  color: #2a1f35;
+}
+
+.action-btn.primary:hover {
+  box-shadow: 0 3px 10px rgba(212, 175, 125, 0.3);
+}
+
+.action-btn.secondary {
+  background: #f8f5f2;
+  color: #2a1f35;
+}
+
+.action-btn.secondary:hover {
+  background: #f0ebe5;
+}
+
+.action-btn.danger {
+  background: rgba(233, 69, 96, 0.1);
+  color: #e94560;
+}
+
+.action-btn.danger:hover {
+  background: rgba(233, 69, 96, 0.15);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 16px;
+}
+
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background: #f8f5f2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-icon i {
+  font-size: 2rem;
+  color: #9b7bb8;
+}
+
+.empty-state h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #2a1f35;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+  color: #6b5b7a;
+  margin-bottom: 1.5rem;
+}
+
+.empty-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #d4af7d, #e8c9a0);
+  border-radius: 25px;
+  color: #2a1f35;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.empty-action:hover {
+  box-shadow: 0 5px 20px rgba(212, 175, 125, 0.3);
+}
+
+/* Help Section */
+.help-section {
+  margin-top: 1rem;
+}
+
+.help-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: rgba(155, 123, 184, 0.1);
+  border-radius: 12px;
+}
+
+.help-card > i {
+  color: #9b7bb8;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.help-content h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2a1f35;
+  margin-bottom: 0.25rem;
+}
+
+.help-content p {
+  font-size: 0.85rem;
+  color: #6b5b7a;
+  line-height: 1.5;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .book-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .booking-main {
+    flex-direction: column;
+  }
+
+  .booking-datetime {
+    text-align: left;
+  }
+
+  .datetime-item {
+    justify-content: flex-start;
+  }
+
+  .booking-actions {
+    flex-direction: column;
+  }
+
+  .action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

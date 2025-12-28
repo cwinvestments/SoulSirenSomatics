@@ -1,0 +1,432 @@
+/* My Profile Styles */
+/* ================== */
+
+.my-profile {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Profile Header */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(155, 123, 184, 0.1), rgba(212, 175, 125, 0.1));
+  border-radius: 20px;
+  margin-bottom: 2rem;
+}
+
+.avatar-large {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #9b7bb8, #d4af7d);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: white;
+  flex-shrink: 0;
+}
+
+.profile-info h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: #2a1f35;
+  margin-bottom: 0.25rem;
+}
+
+.profile-info p {
+  color: #6b5b7a;
+  margin-bottom: 0.5rem;
+}
+
+.member-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.member-badge i {
+  font-size: 0.75rem;
+}
+
+.member-badge.tier-observer {
+  background: rgba(180, 180, 180, 0.15);
+  color: #888;
+}
+
+.member-badge.tier-member {
+  background: rgba(212, 175, 125, 0.15);
+  color: #d4af7d;
+}
+
+.member-badge.tier-inner-circle {
+  background: rgba(155, 123, 184, 0.15);
+  color: #9b7bb8;
+}
+
+/* Profile Grid */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+/* Profile Cards */
+.profile-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.profile-card.full-width {
+  grid-column: 1 / -1;
+}
+
+.card-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(42, 31, 53, 0.05);
+}
+
+.card-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #2a1f35;
+}
+
+.card-header h2 i {
+  color: #d4af7d;
+  font-size: 1rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Form Styles */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #2a1f35;
+  margin-bottom: 0.4rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(42, 31, 53, 0.15);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: #2a1f35;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #9b7bb8;
+  box-shadow: 0 0 0 3px rgba(155, 123, 184, 0.1);
+}
+
+.form-group input::placeholder {
+  color: #a99ab5;
+}
+
+/* Success Message */
+.success-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(78, 205, 196, 0.1);
+  border-radius: 8px;
+  color: #4ecdc4;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.success-message i {
+  font-size: 1rem;
+}
+
+/* Save Button */
+.save-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.85rem;
+  background: linear-gradient(135deg, #d4af7d, #e8c9a0);
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2a1f35;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(212, 175, 125, 0.3);
+}
+
+.save-btn.secondary {
+  background: #9b7bb8;
+  color: white;
+}
+
+.save-btn.secondary:hover {
+  background: #8a6aa7;
+  box-shadow: 0 5px 15px rgba(155, 123, 184, 0.3);
+}
+
+/* Membership Info */
+.membership-info {
+  text-align: center;
+}
+
+.current-tier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.current-tier.tier-observer {
+  background: rgba(180, 180, 180, 0.1);
+}
+
+.current-tier.tier-member {
+  background: rgba(212, 175, 125, 0.1);
+}
+
+.current-tier.tier-inner-circle {
+  background: rgba(155, 123, 184, 0.1);
+}
+
+.tier-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #2a1f35;
+  margin-bottom: 0.25rem;
+}
+
+.tier-label {
+  font-size: 0.85rem;
+  color: #6b5b7a;
+}
+
+.member-since {
+  font-size: 0.9rem;
+  color: #6b5b7a;
+  margin-bottom: 1rem;
+}
+
+.manage-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #f8f5f2;
+  border-radius: 25px;
+  color: #2a1f35;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.manage-btn:hover {
+  background: #f0ebe5;
+}
+
+/* No Membership */
+.no-membership {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.no-membership p {
+  color: #6b5b7a;
+  margin-bottom: 1rem;
+}
+
+.no-membership .join-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #d4af7d, #e8c9a0);
+  border-radius: 25px;
+  color: #2a1f35;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.no-membership .join-btn:hover {
+  box-shadow: 0 5px 15px rgba(212, 175, 125, 0.3);
+}
+
+/* Payment Methods */
+.empty-payment {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.empty-payment p {
+  color: #6b5b7a;
+  margin-bottom: 1rem;
+}
+
+.add-payment-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #f8f5f2;
+  border: none;
+  border-radius: 25px;
+  color: #2a1f35;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-payment-btn:hover {
+  background: #f0ebe5;
+}
+
+/* Toggle List */
+.toggle-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.toggle-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(42, 31, 53, 0.05);
+}
+
+.toggle-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.toggle-item:first-child {
+  padding-top: 0;
+}
+
+.toggle-info {
+  flex: 1;
+}
+
+.toggle-label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #2a1f35;
+  margin-bottom: 0.25rem;
+}
+
+.toggle-desc {
+  display: block;
+  font-size: 0.85rem;
+  color: #6b5b7a;
+}
+
+.toggle-btn {
+  position: relative;
+  width: 50px;
+  height: 28px;
+  background: #e0dce5;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.toggle-btn.active {
+  background: #9b7bb8;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-btn.active .toggle-slider {
+  left: 25px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .toggle-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .toggle-btn {
+    margin-left: 0;
+  }
+}

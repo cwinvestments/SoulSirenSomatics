@@ -62,6 +62,7 @@ function Home() {
             <Link to="/sanctuary" onClick={() => setMobileMenuOpen(false)}>Sanctuary</Link>
             <Link to="/book" onClick={() => setMobileMenuOpen(false)}>Book</Link>
             <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
+            <Link to="/portal" onClick={() => setMobileMenuOpen(false)} className="nav-login">Client Login</Link>
           </div>
         </div>
       </nav>
@@ -395,6 +396,7 @@ function Home() {
               <ul>
                 <li><Link to="/contact">Contact Us</Link></li>
                 <li><Link to="/sanctuary">Join Sanctuary</Link></li>
+                <li><Link to="/portal">Client Login</Link></li>
                 <li><a href="mailto:hello@soulsirensomatic.com">Email Us</a></li>
               </ul>
             </div>

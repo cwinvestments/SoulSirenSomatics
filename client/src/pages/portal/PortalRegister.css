@@ -1,0 +1,252 @@
+/* Portal Register Styles */
+/* ====================== */
+
+.portal-register-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2a1f35 0%, #1a1225 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-family: 'Raleway', sans-serif;
+}
+
+.register-container {
+  width: 100%;
+  max-width: 500px;
+}
+
+.back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  transition: color 0.2s ease;
+}
+
+.back-home:hover {
+  color: #d4af7d;
+}
+
+.register-card {
+  background: white;
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Register Header */
+.register-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.register-logo {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.25rem;
+  background: linear-gradient(135deg, rgba(212, 175, 125, 0.15), rgba(155, 123, 184, 0.15));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-logo i {
+  font-size: 1.75rem;
+  color: #d4af7d;
+}
+
+.register-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: #2a1f35;
+  margin-bottom: 0.5rem;
+}
+
+.register-header p {
+  color: #6b5b7a;
+  font-size: 0.95rem;
+}
+
+/* Error Message */
+.register-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: rgba(233, 69, 96, 0.1);
+  border: 1px solid rgba(233, 69, 96, 0.2);
+  border-radius: 12px;
+  color: #e94560;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Register Form */
+.register-form {
+  margin-bottom: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  color: #2a1f35;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  background: #f8f5f2;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  color: #2a1f35;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input::placeholder {
+  color: #9b7bb8;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #d4af7d;
+  background: white;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9b7bb8;
+  font-size: 0.85rem;
+}
+
+.input-wrapper input {
+  padding-left: 2.75rem;
+}
+
+/* Terms */
+.form-terms {
+  margin: 1.25rem 0;
+}
+
+.terms-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #6b5b7a;
+  line-height: 1.4;
+}
+
+.terms-checkbox input {
+  accent-color: #d4af7d;
+  margin-top: 0.2rem;
+}
+
+.terms-checkbox a {
+  color: #d4af7d;
+  text-decoration: none;
+}
+
+.terms-checkbox a:hover {
+  text-decoration: underline;
+}
+
+/* Register Button */
+.register-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #d4af7d, #e8c9a0);
+  border: none;
+  border-radius: 12px;
+  color: #2a1f35;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.register-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(212, 175, 125, 0.4);
+}
+
+.register-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Register Footer */
+.register-footer {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(42, 31, 53, 0.1);
+}
+
+.register-footer p {
+  color: #6b5b7a;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.login-link {
+  color: #d4af7d;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.login-link:hover {
+  color: #9b7bb8;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .portal-register-page {
+    padding: 1rem;
+  }
+
+  .register-card {
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .register-header h1 {
+    font-size: 1.5rem;
+  }
+}

@@ -183,6 +183,25 @@
   width: 100%;
 }
 
+.nav-links a.nav-login {
+  background: linear-gradient(135deg, var(--color-gold), #e8c9a0);
+  color: var(--color-purple);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 500;
+  margin-left: 0.5rem;
+}
+
+.nav-links a.nav-login::after {
+  display: none;
+}
+
+.nav-links a.nav-login:hover {
+  color: var(--color-purple);
+  box-shadow: 0 4px 15px rgba(212, 175, 125, 0.3);
+  transform: translateY(-1px);
+}
+
 .mobile-menu-btn {
   display: none;
   background: none;
