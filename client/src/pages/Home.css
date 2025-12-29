@@ -324,7 +324,7 @@
 .hero-subtitle {
   font-size: clamp(1.1rem, 2.5vw, 1.35rem);
   font-weight: 300;
-  color: var(--color-lavender);
+  color: #c4b5d0;
   line-height: 1.8;
   margin-bottom: 2.5rem;
   max-width: 600px;
@@ -472,7 +472,7 @@
 
 .stat-label {
   font-size: 0.9rem;
-  color: var(--color-lavender);
+  color: #e2e8f0;
 }
 
 /* ===== Pillars Section ===== */
@@ -519,7 +519,7 @@
 
 .pillar-card p {
   font-size: 1rem;
-  color: var(--color-lavender);
+  color: #c4b5d0;
   line-height: 1.7;
 }
 
@@ -594,7 +594,7 @@
 
 .step-content p {
   font-size: 1rem;
-  color: var(--color-lavender);
+  color: #c4b5d0;
   line-height: 1.7;
 }
 
@@ -677,7 +677,7 @@
 .service-features li {
   padding: 10px 0;
   font-size: 0.95rem;
-  color: var(--color-lavender);
+  color: #d4c5e0;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -747,7 +747,7 @@
 
 .testimonial-author {
   font-size: 0.95rem;
-  color: var(--color-lavender);
+  color: #c4b5d0;
 }
 
 .testimonial-dots {
