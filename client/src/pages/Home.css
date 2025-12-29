@@ -36,6 +36,16 @@
   overflow-x: hidden;
 }
 
+.home ::selection {
+  background: var(--color-gold);
+  color: var(--color-deep-purple);
+}
+
+.home ::-moz-selection {
+  background: var(--color-gold);
+  color: var(--color-deep-purple);
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -420,6 +430,9 @@
   font-weight: 400;
   color: var(--color-cream);
   margin-bottom: 20px;
+  background: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .section-line {
