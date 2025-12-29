@@ -211,7 +211,7 @@
 .hero-subtitle {
   font-size: clamp(1.2rem, 3vw, 1.5rem);
   font-weight: 300;
-  color: var(--color-lavender);
+  color: #c4b5d0;
   font-style: italic;
 }
 
@@ -286,7 +286,7 @@
 
 .story-card p {
   font-size: 1rem;
-  color: var(--color-lavender);
+  color: #c4b5d0;
   line-height: 1.8;
   font-style: italic;
 }
@@ -335,7 +335,7 @@
 
 .pillar-content p {
   font-size: 1.05rem;
-  color: var(--color-lavender);
+  color: #c4b5d0;
   line-height: 1.8;
 }
 

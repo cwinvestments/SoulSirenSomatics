@@ -194,7 +194,7 @@
 .hero-subtitle {
   font-size: clamp(1.1rem, 2.5vw, 1.35rem);
   font-weight: 300;
-  color: var(--color-lavender);
+  color: #c4b5d0;
 }
 
 /* ===== Section Styling ===== */
@@ -324,7 +324,7 @@
 
 .service-description {
   font-size: 1rem;
-  color: var(--color-lavender);
+  color: #c4b5d0;
   line-height: 1.7;
   margin-bottom: 30px;
 }
@@ -447,7 +447,7 @@
 
 .expect-card p {
   font-size: 1rem;
-  color: var(--color-lavender);
+  color: #c4b5d0;
   line-height: 1.7;
 }
 
