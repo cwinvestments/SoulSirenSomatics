@@ -110,16 +110,18 @@
 
 .input-wrapper i {
   position: absolute;
-  left: 1rem;
+  left: 14px;
   top: 50%;
   transform: translateY(-50%);
   color: #9b7bb8;
   font-size: 0.9rem;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .input-wrapper input {
   width: 100%;
-  padding: 1rem 1rem 1rem 2.75rem;
+  padding: 1rem 1rem 1rem 45px;
   background: #f8f5f2;
   border: 2px solid transparent;
   border-radius: 12px;
