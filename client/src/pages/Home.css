@@ -427,12 +427,13 @@
 .section-title {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 400;
-  color: var(--color-cream);
+  font-weight: 500;
+  color: #f4e8dc !important;
   margin-bottom: 20px;
   background: transparent;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
+  opacity: 1 !important;
 }
 
 .section-line {
