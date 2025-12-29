@@ -51,12 +51,12 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.8rem;
   font-weight: 500;
-  color: #d4af7d;
+  color: #ffffff !important;
   margin-bottom: 0.5rem;
 }
 
 .login-header p {
-  color: rgba(255, 255, 255, 0.6);
+  color: #a0aec0 !important;
   font-size: 0.95rem;
 }
 
@@ -86,7 +86,7 @@
 .form-group label {
   display: block;
   font-size: 0.9rem;
-  color: #ffffff;
+  color: #ffffff !important;
   margin-bottom: 0.5rem;
   font-weight: 500;
 }

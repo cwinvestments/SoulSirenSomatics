@@ -14,12 +14,12 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 2rem;
   font-weight: 500;
-  color: #ffffff;
+  color: #ffffff !important;
   margin-bottom: 0.25rem;
 }
 
 .header-content p {
-  color: #a0aec0;
+  color: #a0aec0 !important;
   font-size: 1rem;
 }
 
@@ -72,7 +72,7 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.2rem;
   font-weight: 500;
-  color: #ffffff;
+  color: #ffffff !important;
   margin-bottom: 0.25rem;
 }
 
@@ -184,7 +184,7 @@
 .stat-value {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #ffffff !important;
   line-height: 1.2;
 }
 
@@ -216,7 +216,7 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.2rem;
   font-weight: 500;
-  color: #ffffff;
+  color: #ffffff !important;
   margin-bottom: 0.25rem;
 }
 
