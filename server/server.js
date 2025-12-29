@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const { pool, testConnection } = require('./config/database');
+const { initDb } = require('./config/initDb');
 const authRoutes = require('./routes/auth');
 
 dotenv.config();
@@ -54,6 +55,12 @@ const startServer = async () => {
     // Test database connection
     await testConnection();
     console.log('Database connected successfully');
+
+    // Initialize database if INIT_DB=true
+    if (process.env.INIT_DB === 'true') {
+      console.log('INIT_DB=true, initializing database schema...');
+      await initDb();
+    }
 
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
