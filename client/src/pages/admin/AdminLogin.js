@@ -57,32 +57,26 @@ function AdminLogin() {
           <form onSubmit={handleSubmit} className="login-form">
             <div className="form-group">
               <label htmlFor="email">Email Address</label>
-              <div className="input-wrapper">
-                <i className="fas fa-envelope"></i>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
+              />
             </div>
 
             <div className="form-group">
               <label htmlFor="password">Password</label>
-              <div className="input-wrapper">
-                <i className="fas fa-lock"></i>
-                <input
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
-                  required
-                />
-              </div>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                required
+              />
             </div>
 
             <button type="submit" className="login-btn" disabled={loading}>

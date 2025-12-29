@@ -104,24 +104,9 @@
   font-weight: 500;
 }
 
-.input-wrapper {
-  position: relative;
-}
-
-.input-wrapper i {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #9b7bb8;
-  font-size: 0.9rem;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.input-wrapper input {
+.form-group input {
   width: 100%;
-  padding: 1rem 1rem 1rem 45px;
+  padding: 1rem;
   background: #f8f5f2;
   border: 2px solid transparent;
   border-radius: 12px;
@@ -131,11 +116,11 @@
   transition: all 0.3s ease;
 }
 
-.input-wrapper input::placeholder {
+.form-group input::placeholder {
   color: #9b7bb8;
 }
 
-.input-wrapper input:focus {
+.form-group input:focus {
   outline: none;
   border-color: #d4af7d;
   background: white;
