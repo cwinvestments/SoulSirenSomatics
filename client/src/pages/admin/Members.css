@@ -24,7 +24,7 @@
 }
 
 .header-content p {
-  color: rgba(255, 255, 255, 0.6);
+  color: #a0aec0;
   font-size: 1rem;
 }
 
@@ -109,7 +109,7 @@
 
 .tier-label {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: #a0aec0;
 }
 
 /* Filter Tabs */
@@ -164,7 +164,7 @@
   text-align: left;
   font-size: 0.85rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.6);
+  color: #a0aec0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -173,7 +173,7 @@
 .data-table td {
   padding: 1rem 1.25rem;
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: #e2e8f0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 

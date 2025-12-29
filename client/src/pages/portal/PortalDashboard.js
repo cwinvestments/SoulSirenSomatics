@@ -52,7 +52,11 @@ function PortalDashboard() {
           {user?.membershipTier && (
             <div className={`membership-badge ${getMembershipBadgeClass()}`}>
               <i className="fas fa-heart"></i>
-              {user.membershipTier === 'inner-circle' ? 'Inner Circle' : user.membershipTier.charAt(0).toUpperCase() + user.membershipTier.slice(1)} Member
+              {user.membershipTier === 'inner-circle'
+                ? 'Inner Circle Member'
+                : user.membershipTier === 'member'
+                  ? 'Member'
+                  : `${user.membershipTier.charAt(0).toUpperCase() + user.membershipTier.slice(1)} Member`}
             </div>
           )}
         </div>

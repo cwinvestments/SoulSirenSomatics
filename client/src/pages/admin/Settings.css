@@ -19,7 +19,7 @@
 }
 
 .header-content p {
-  color: rgba(255, 255, 255, 0.6);
+  color: #a0aec0;
   font-size: 1rem;
 }
 
@@ -92,7 +92,7 @@
 .form-group label {
   display: block;
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: #e2e8f0;
   margin-bottom: 0.5rem;
   font-weight: 500;
 }
@@ -170,7 +170,7 @@
 
 .toggle-desc {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: #8892a6;
 }
 
 /* Toggle Button */
@@ -259,7 +259,7 @@
 
 .integration-desc {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: #8892a6;
 }
 
 .integration-status {
@@ -306,7 +306,7 @@
 
 .danger-desc {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: #8892a6;
 }
 
 .danger-btn {

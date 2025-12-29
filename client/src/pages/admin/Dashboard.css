@@ -24,7 +24,7 @@
 }
 
 .header-content p {
-  color: rgba(255, 255, 255, 0.6);
+  color: #a0aec0;
   font-size: 1rem;
 }
 
@@ -32,7 +32,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: #a0aec0;
   font-size: 0.9rem;
 }
 
@@ -84,7 +84,7 @@
 
 .stat-label {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: #a0aec0;
 }
 
 /* Dashboard Grid */
@@ -176,7 +176,7 @@
 
 .activity-detail {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: #a0aec0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -184,7 +184,7 @@
 
 .activity-time {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: #8892a6;
   white-space: nowrap;
 }
 
@@ -266,7 +266,7 @@
 
 .upcoming-service {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: #a0aec0;
 }
 
 /* Mobile Responsive */
