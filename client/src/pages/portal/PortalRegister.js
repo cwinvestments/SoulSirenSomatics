@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { usePortalAuth } from '../../context/PortalAuthContext';
+import api from '../../api';
 import './PortalRegister.css';
 
 function PortalRegister() {
@@ -13,6 +14,7 @@ function PortalRegister() {
     confirmPassword: '',
   });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { register } = usePortalAuth();
@@ -25,9 +27,10 @@ function PortalRegister() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
 
     // Validation
     if (formData.password !== formData.confirmPassword) {
@@ -42,22 +45,46 @@ function PortalRegister() {
 
     setLoading(true);
 
-    setTimeout(() => {
-      const result = register({
+    try {
+      // Try real API first
+      await api.post('/auth/register', {
+        email: formData.email,
+        password: formData.password,
         firstName: formData.firstName,
         lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone,
-        password: formData.password,
+        phone: formData.phone || null,
       });
 
-      if (result.success) {
-        navigate('/portal/dashboard');
+      setSuccess('Account created successfully! Redirecting to login...');
+
+      // Redirect to login after short delay
+      setTimeout(() => {
+        navigate('/portal');
+      }, 2000);
+    } catch (err) {
+      // If API fails, fall back to demo mode
+      if (err.response) {
+        setError(err.response.data?.error?.message || 'Registration failed. Please try again.');
       } else {
-        setError(result.error);
+        // API unavailable - try demo registration
+        console.log('API unavailable, trying demo mode...');
+        const result = register({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          password: formData.password,
+        });
+
+        if (result.success) {
+          navigate('/portal/dashboard');
+        } else {
+          setError(result.error || 'Unable to connect to server. Please try again.');
+        }
       }
+    } finally {
       setLoading(false);
-    }, 500);
+    }
   };
 
   return (
@@ -81,6 +108,13 @@ function PortalRegister() {
             <div className="register-error">
               <i className="fas fa-exclamation-circle"></i>
               {error}
+            </div>
+          )}
+
+          {success && (
+            <div className="register-success">
+              <i className="fas fa-check-circle"></i>
+              {success}
             </div>
           )}
 

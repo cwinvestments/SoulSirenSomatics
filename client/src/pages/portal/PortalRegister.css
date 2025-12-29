@@ -87,6 +87,19 @@
   margin-bottom: 1.5rem;
 }
 
+.register-success {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: rgba(76, 175, 80, 0.1);
+  border: 1px solid rgba(76, 175, 80, 0.2);
+  border-radius: 12px;
+  color: #4caf50;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
 /* Register Form */
 .register-form {
   margin-bottom: 1.5rem;

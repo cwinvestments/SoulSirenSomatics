@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from '../../api';
 import './AdminLogin.css';
 
 function AdminLogin() {
@@ -17,22 +18,45 @@ function AdminLogin() {
     }
   }, [navigate]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
 
-    // Simulate API call delay
-    setTimeout(() => {
-      // Hardcoded credentials check
-      if (email === 'admin@soulsirensomatics.com' && password === 'admin123') {
-        localStorage.setItem('isAdminLoggedIn', 'true');
-        navigate('/admin/dashboard');
-      } else {
-        setError('Invalid email or password');
+    try {
+      // Try real API first
+      const response = await api.post('/auth/login', { email, password });
+
+      // Check if user is admin
+      if (response.data.user.role !== 'admin') {
+        setError('Not authorized. Admin access only.');
+        setLoading(false);
+        return;
       }
+
+      // Store token and admin user data
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('adminUser', JSON.stringify(response.data.user));
+      localStorage.setItem('isAdminLoggedIn', 'true');
+
+      navigate('/admin/dashboard');
+    } catch (err) {
+      // If API fails, fall back to demo mode
+      if (err.response) {
+        setError(err.response.data?.error?.message || 'Invalid email or password');
+      } else {
+        // API unavailable - try hardcoded admin login
+        console.log('API unavailable, trying demo mode...');
+        if (email === 'admin@soulsirensomatics.com' && password === 'admin123') {
+          localStorage.setItem('isAdminLoggedIn', 'true');
+          navigate('/admin/dashboard');
+        } else {
+          setError('Invalid email or password');
+        }
+      }
+    } finally {
       setLoading(false);
-    }, 500);
+    }
   };
 
   return (

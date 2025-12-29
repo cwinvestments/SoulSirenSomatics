@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { usePortalAuth } from '../../context/PortalAuthContext';
+import api from '../../api';
 import './PortalLogin.css';
 
 function PortalLogin() {
@@ -17,20 +18,40 @@ function PortalLogin() {
     }
   }, [isLoggedIn, navigate]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
 
-    setTimeout(() => {
-      const result = login(email, password);
-      if (result.success) {
-        navigate('/portal/dashboard');
+    try {
+      // Try real API first
+      const response = await api.post('/auth/login', { email, password });
+
+      // Store token and user data
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+
+      // Update auth context
+      login(email, password, response.data.user, response.data.token);
+
+      navigate('/portal/dashboard');
+    } catch (err) {
+      // If API fails, fall back to demo mode
+      if (err.response) {
+        setError(err.response.data?.error?.message || 'Invalid email or password');
       } else {
-        setError(result.error);
+        // API unavailable - try demo login
+        console.log('API unavailable, trying demo mode...');
+        const result = login(email, password);
+        if (result.success) {
+          navigate('/portal/dashboard');
+        } else {
+          setError(result.error || 'Unable to connect to server. Please try again.');
+        }
       }
+    } finally {
       setLoading(false);
-    }, 500);
+    }
   };
 
   return (
