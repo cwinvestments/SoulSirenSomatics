@@ -71,8 +71,8 @@ function MyBookings() {
         {/* Page Header */}
         <div className="page-header">
           <div className="header-content">
-            <h1>My Bookings</h1>
-            <p>View and manage your appointments</p>
+            <h1 style={{ color: '#2a1f35' }}>My Bookings</h1>
+            <p style={{ color: '#6b5b7a' }}>View and manage your appointments</p>
           </div>
           <Link to="/book" className="book-btn">
             <i className="fas fa-plus"></i>

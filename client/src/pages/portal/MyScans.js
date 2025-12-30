@@ -93,8 +93,8 @@ function MyScans() {
         {/* Page Header */}
         <div className="page-header">
           <div className="header-content">
-            <h1>My Energetic Scans</h1>
-            <p>View your personalized scan reports</p>
+            <h1 style={{ color: '#2a1f35' }}>My Energetic Scans</h1>
+            <p style={{ color: '#6b5b7a' }}>View your personalized scan reports</p>
           </div>
           <Link to="/book" className="request-btn">
             <i className="fas fa-plus"></i>

@@ -65,8 +65,8 @@ function MySanctuary() {
             <div className="locked-icon">
               <i className="fas fa-lock"></i>
             </div>
-            <h1>Join the Soul Siren Sanctuary</h1>
-            <p>A sacred space for women to heal, feel, and return home to their bodies</p>
+            <h1 style={{ color: '#2a1f35' }}>Join the Soul Siren Sanctuary</h1>
+            <p style={{ color: '#6b5b7a' }}>A sacred space for women to heal, feel, and return home to their bodies</p>
           </div>
 
           <div className="benefits-preview">
@@ -128,8 +128,8 @@ function MySanctuary() {
         {/* Welcome Header */}
         <div className="sanctuary-header">
           <div className="header-content">
-            <h1>The Sanctuary</h1>
-            <p>Welcome to your healing community</p>
+            <h1 style={{ color: '#2a1f35' }}>The Sanctuary</h1>
+            <p style={{ color: '#6b5b7a' }}>Welcome to your healing community</p>
           </div>
           <div className={`tier-badge tier-${user.membershipTier}`}>
             <i className="fas fa-heart"></i>
