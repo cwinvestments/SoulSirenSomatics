@@ -7,20 +7,33 @@ const API_BASE = process.env.REACT_APP_API_URL || 'https://soulsirensomatics-pro
 const BASE_HOST = API_BASE.replace(/\/api\/?$/, '');
 
 const getAttachmentUrl = (attachment) => {
+  console.log('getAttachmentUrl DEBUG:', {
+    attachment,
+    API_BASE,
+    BASE_HOST,
+    hasPath: !!attachment.path,
+    hasUrl: !!attachment.url
+  });
+
   // Prefer path (new format), construct full URL
   if (attachment.path) {
-    return `${BASE_HOST}${attachment.path}`;
+    const result = `${BASE_HOST}${attachment.path}`;
+    console.log('Using path, result:', result);
+    return result;
   }
   // For old format with url, extract path and reconstruct with correct host
   if (attachment.url) {
     try {
       const urlObj = new URL(attachment.url);
-      return `${BASE_HOST}${urlObj.pathname}`;
-    } catch {
-      // If URL parsing fails, return as-is
+      const result = `${BASE_HOST}${urlObj.pathname}`;
+      console.log('Using url, extracted pathname:', urlObj.pathname, 'result:', result);
+      return result;
+    } catch (e) {
+      console.log('URL parse error:', e, 'returning as-is:', attachment.url);
       return attachment.url;
     }
   }
+  console.log('No path or url found, returning empty');
   return '';
 };
 
