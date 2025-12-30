@@ -25,7 +25,8 @@ function Scans() {
     try {
       setLoading(true);
       const response = await api.get('/scans');
-      setScans(response.data);
+      const scansData = Array.isArray(response.data) ? response.data : (response.data.scans || []);
+      setScans(scansData);
       setError(null);
     } catch (err) {
       console.error('Error fetching scans:', err);
