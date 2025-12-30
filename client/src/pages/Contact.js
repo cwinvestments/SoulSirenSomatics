@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import api from '../api';
 import './Contact.css';
 
 function Contact() {
@@ -12,6 +13,8 @@ function Contact() {
     message: ''
   });
   const [formStatus, setFormStatus] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,15 +32,32 @@ function Contact() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // For now, just show success message
-    // In production, this would integrate with a backend or email service
-    setFormStatus('success');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setIsSubmitting(true);
+    setErrorMessage('');
+    setFormStatus(null);
 
-    // Clear success message after 5 seconds
-    setTimeout(() => setFormStatus(null), 5000);
+    try {
+      await api.post('/contact', {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message
+      });
+
+      setFormStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+
+      // Clear success message after 5 seconds
+      setTimeout(() => setFormStatus(null), 5000);
+    } catch (error) {
+      const message = error.response?.data?.error?.message || 'Failed to send message. Please try again.';
+      setErrorMessage(message);
+      setFormStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -93,6 +113,13 @@ function Contact() {
                 <div className="form-success glass-card">
                   <i className="fas fa-check-circle"></i>
                   <p>Thank you! Your message has been sent. I'll be in touch soon.</p>
+                </div>
+              )}
+
+              {formStatus === 'error' && (
+                <div className="form-error glass-card">
+                  <i className="fas fa-exclamation-circle"></i>
+                  <p>{errorMessage}</p>
                 </div>
               )}
 
@@ -154,9 +181,9 @@ function Contact() {
                   ></textarea>
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-full">
-                  <span>Send Message</span>
-                  <i className="fas fa-paper-plane"></i>
+                <button type="submit" className="btn btn-primary btn-full" disabled={isSubmitting}>
+                  <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                  <i className={`fas ${isSubmitting ? 'fa-spinner fa-spin' : 'fa-paper-plane'}`}></i>
                 </button>
               </form>
             </div>
