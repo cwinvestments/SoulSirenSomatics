@@ -12,6 +12,7 @@ function AdminLayout({ children }) {
   const navItems = [
     { path: '/admin/dashboard', label: 'Dashboard', icon: 'fa-home' },
     { path: '/admin/clients', label: 'Clients', icon: 'fa-users' },
+    { path: '/admin/scans', label: 'Scans', icon: 'fa-wave-square' },
     { path: '/admin/bookings', label: 'Bookings', icon: 'fa-calendar-alt' },
     { path: '/admin/members', label: 'Members', icon: 'fa-id-card' },
     { path: '/admin/content', label: 'Content', icon: 'fa-file-alt' },

@@ -14,6 +14,7 @@ import Contact from './pages/Contact';
 import AdminLogin from './pages/admin/AdminLogin';
 import Dashboard from './pages/admin/Dashboard';
 import Clients from './pages/admin/Clients';
+import Scans from './pages/admin/Scans';
 import Bookings from './pages/admin/Bookings';
 import Members from './pages/admin/Members';
 import Content from './pages/admin/Content';
@@ -90,6 +91,11 @@ function App() {
             <Route path="/admin/clients" element={
               <ProtectedRoute>
                 <Clients />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/scans" element={
+              <ProtectedRoute>
+                <Scans />
               </ProtectedRoute>
             } />
             <Route path="/admin/bookings" element={
