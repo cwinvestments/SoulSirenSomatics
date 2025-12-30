@@ -16,6 +16,7 @@ function MyScans() {
   const [compareMode, setCompareMode] = useState(false);
   const [selectedScans, setSelectedScans] = useState([]);
   const [showCompareModal, setShowCompareModal] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState(null);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -45,6 +46,18 @@ function MyScans() {
       month: 'long',
       day: 'numeric'
     });
+  };
+
+  const formatFileSize = (bytes) => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  };
+
+  const isImageFile = (type) => {
+    return type && type.startsWith('image/');
   };
 
   const toggleScan = (id) => {
@@ -610,6 +623,58 @@ function MyScans() {
                       </div>
                     )}
 
+                    {/* Attachments Section */}
+                    {scan.attachments && scan.attachments.length > 0 && (
+                      <div className="report-section attachments-section">
+                        <div className="section-header">
+                          <i className="fas fa-paperclip"></i>
+                          <h4>Attachments ({scan.attachments.length})</h4>
+                        </div>
+                        <div className="attachments-grid">
+                          {scan.attachments.map((attachment, index) => (
+                            <div key={index} className="attachment-item">
+                              {isImageFile(attachment.type) ? (
+                                <div
+                                  className="attachment-thumbnail"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setLightboxImage(attachment);
+                                  }}
+                                >
+                                  <img
+                                    src={attachment.url}
+                                    alt={attachment.originalName}
+                                    loading="lazy"
+                                  />
+                                  <div className="thumbnail-overlay">
+                                    <i className="fas fa-expand"></i>
+                                  </div>
+                                </div>
+                              ) : (
+                                <a
+                                  href={attachment.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="attachment-file"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <i className="fas fa-file-pdf"></i>
+                                </a>
+                              )}
+                              <div className="attachment-info">
+                                <span className="attachment-name" title={attachment.originalName}>
+                                  {attachment.originalName}
+                                </span>
+                                <span className="attachment-size">
+                                  {formatFileSize(attachment.size)}
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
                     <div className="report-disclaimer">
                       <i className="fas fa-exclamation-triangle"></i>
                       <p>This scan is for educational purposes only and does not constitute medical advice. Please consult with healthcare professionals for medical concerns.</p>
@@ -719,6 +784,25 @@ function MyScans() {
                 <button className="close-compare-btn" onClick={exitCompareMode}>
                   Close Comparison
                 </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Lightbox Modal for Images */}
+        {lightboxImage && (
+          <div className="lightbox-overlay" onClick={() => setLightboxImage(null)}>
+            <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+              <button className="lightbox-close" onClick={() => setLightboxImage(null)}>
+                <i className="fas fa-times"></i>
+              </button>
+              <img
+                src={lightboxImage.url}
+                alt={lightboxImage.originalName}
+              />
+              <div className="lightbox-caption">
+                <span className="lightbox-filename">{lightboxImage.originalName}</span>
+                <span className="lightbox-size">{formatFileSize(lightboxImage.size)}</span>
               </div>
             </div>
           </div>
