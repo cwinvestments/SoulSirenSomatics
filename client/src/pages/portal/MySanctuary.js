@@ -1,16 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PortalLayout from '../../components/PortalLayout';
 import { usePortalAuth } from '../../context/PortalAuthContext';
+import api from '../../api';
 import './MySanctuary.css';
 
 function MySanctuary() {
   const { user } = usePortalAuth();
-  const isMember = user?.membershipTier;
+  const [membership, setMembership] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [joining, setJoining] = useState(false);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    fetchMembership();
+  }, []);
+
+  const fetchMembership = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await api.get('/memberships/my');
+      setMembership(response.data);
+    } catch (err) {
+      // 404 means no membership, which is okay
+      if (err.response?.status === 404) {
+        setMembership(null);
+      } else {
+        console.error('Error fetching membership:', err);
+        setError('Failed to load membership data. Please try again.');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const joinMembership = async (tier) => {
+    try {
+      setJoining(true);
+      const response = await api.post('/memberships', { tier });
+      setMembership(response.data);
+    } catch (err) {
+      console.error('Error joining membership:', err);
+      alert('Failed to join membership. Please try again.');
+    } finally {
+      setJoining(false);
+    }
+  };
 
   const membershipTiers = [
     {
-      id: 'observer',
+      id: 'free',
       name: 'Observer',
       price: 'FREE',
       period: '',
@@ -18,8 +59,8 @@ function MySanctuary() {
       color: '#888',
     },
     {
-      id: 'member',
-      name: 'Member',
+      id: 'seeker',
+      name: 'Seeker',
       price: '$27',
       period: '/month',
       features: ['Everything in Observer', 'Weekly live sessions', 'Full resource library', 'Self-care Sunday sessions', 'Fascia tools tutorials'],
@@ -27,11 +68,11 @@ function MySanctuary() {
       color: '#d4af7d',
     },
     {
-      id: 'inner-circle',
-      name: 'Inner Circle',
+      id: 'siren',
+      name: 'Siren',
       price: '$97',
       period: '/month',
-      features: ['Everything in Member', 'Monthly 1:1 with Timberly', 'Priority booking', 'Personalized guidance', 'Direct message access'],
+      features: ['Everything in Seeker', 'Monthly 1:1 with Timberly', 'Priority booking', 'Personalized guidance', 'Direct message access'],
       color: '#9b7bb8',
     },
   ];
@@ -50,14 +91,62 @@ function MySanctuary() {
     { id: 6, title: 'Evening Wind Down', category: 'Self-Care', duration: '12 min', thumbnail: null },
   ];
 
-  const getTierName = () => {
-    if (!user?.membershipTier) return '';
-    if (user.membershipTier === 'inner-circle') return 'Inner Circle';
-    return user.membershipTier.charAt(0).toUpperCase() + user.membershipTier.slice(1);
+  const getTierDisplayName = (tier) => {
+    switch (tier) {
+      case 'free':
+        return 'Observer';
+      case 'seeker':
+        return 'Seeker';
+      case 'siren':
+        return 'Siren';
+      default:
+        return tier ? tier.charAt(0).toUpperCase() + tier.slice(1) : '';
+    }
   };
 
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  // Loading state
+  if (loading) {
+    return (
+      <PortalLayout>
+        <div className="my-sanctuary">
+          <div className="loading-state">
+            <div className="loading-spinner"></div>
+            <p>Loading your sanctuary...</p>
+          </div>
+        </div>
+      </PortalLayout>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <PortalLayout>
+        <div className="my-sanctuary">
+          <div className="error-state">
+            <i className="fas fa-exclamation-circle"></i>
+            <p>{error}</p>
+            <button onClick={fetchMembership} className="retry-btn">
+              <i className="fas fa-redo"></i> Try Again
+            </button>
+          </div>
+        </div>
+      </PortalLayout>
+    );
+  }
+
   // Non-Member View
-  if (!isMember) {
+  if (!membership) {
     return (
       <PortalLayout>
         <div className="my-sanctuary not-member">
@@ -109,9 +198,17 @@ function MySanctuary() {
                       </li>
                     ))}
                   </ul>
-                  <Link to="/sanctuary" className={`join-btn ${tier.popular ? 'primary' : 'secondary'}`}>
-                    {tier.price === 'FREE' ? 'Join Free' : 'Join Now'}
-                  </Link>
+                  <button
+                    onClick={() => joinMembership(tier.id)}
+                    disabled={joining}
+                    className={`join-btn ${tier.popular ? 'primary' : 'secondary'}`}
+                  >
+                    {joining ? (
+                      <><i className="fas fa-spinner fa-spin"></i> Joining...</>
+                    ) : (
+                      tier.price === 'FREE' ? 'Join Free' : 'Join Now'
+                    )}
+                  </button>
                 </div>
               ))}
             </div>
@@ -131,9 +228,37 @@ function MySanctuary() {
             <h1 style={{ color: '#2a1f35' }}>The Sanctuary</h1>
             <p style={{ color: '#6b5b7a' }}>Welcome to your healing community</p>
           </div>
-          <div className={`tier-badge tier-${user.membershipTier}`}>
+          <div className={`tier-badge tier-${membership.tier}`}>
             <i className="fas fa-heart"></i>
-            {getTierName()} Member
+            {getTierDisplayName(membership.tier)} Member
+          </div>
+        </div>
+
+        {/* Membership Info */}
+        <div className="membership-info-card">
+          <div className="membership-details">
+            <div className="detail-item">
+              <span className="detail-label">Status</span>
+              <span className={`status-badge ${membership.status}`}>
+                {membership.status === 'active' ? (
+                  <><i className="fas fa-check-circle"></i> Active</>
+                ) : membership.status === 'cancelled' ? (
+                  <><i className="fas fa-times-circle"></i> Cancelled</>
+                ) : (
+                  <><i className="fas fa-clock"></i> {membership.status}</>
+                )}
+              </span>
+            </div>
+            <div className="detail-item">
+              <span className="detail-label">Member Since</span>
+              <span className="detail-value">{formatDate(membership.start_date)}</span>
+            </div>
+            {membership.end_date && (
+              <div className="detail-item">
+                <span className="detail-label">Renews On</span>
+                <span className="detail-value">{formatDate(membership.end_date)}</span>
+              </div>
+            )}
           </div>
         </div>
 
