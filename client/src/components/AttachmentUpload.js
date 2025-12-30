@@ -46,6 +46,7 @@ function AttachmentUpload({ scanId, existingAttachments = [], onUploadComplete, 
     return validFiles;
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleFiles = useCallback((files) => {
     setError(null);
     const validFiles = validateFiles(files);
