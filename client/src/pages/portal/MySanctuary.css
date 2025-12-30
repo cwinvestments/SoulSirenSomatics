@@ -37,13 +37,13 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 2.25rem;
   font-weight: 500;
-  color: #2a1f35;
+  color: #2a1f35 !important;
   margin-bottom: 0.5rem;
 }
 
 .locked-header p {
   font-size: 1.1rem;
-  color: #6b5b7a;
+  color: #6b5b7a !important;
 }
 
 /* Benefits Preview */
@@ -224,12 +224,12 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 2rem;
   font-weight: 500;
-  color: #2a1f35;
+  color: #2a1f35 !important;
   margin-bottom: 0.25rem;
 }
 
 .sanctuary-header .header-content p {
-  color: #6b5b7a;
+  color: #6b5b7a !important;
 }
 
 .tier-badge {

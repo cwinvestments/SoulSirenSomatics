@@ -20,12 +20,12 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 2rem;
   font-weight: 500;
-  color: #2a1f35;
+  color: #2a1f35 !important;
   margin-bottom: 0.25rem;
 }
 
 .header-content p {
-  color: #6b5b7a;
+  color: #6b5b7a !important;
   font-size: 1rem;
 }
 
@@ -208,8 +208,9 @@
 }
 
 .action-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.6rem 1rem;
   border-radius: 8px;
@@ -219,6 +220,8 @@
   transition: all 0.2s ease;
   text-decoration: none;
   border: none;
+  white-space: nowrap;
+  text-align: center;
 }
 
 .action-btn.primary {
