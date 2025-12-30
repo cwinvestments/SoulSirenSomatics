@@ -74,7 +74,8 @@ function MyScans() {
 
   // Compute scan statistics
   const scanStats = useMemo(() => {
-    if (scans.length === 0) return null;
+    console.log('Computing scanStats, scans:', scans);
+    if (!scans || scans.length === 0) return null;
 
     const completedScans = scans.filter(s => s.status === 'completed');
     const sortedScans = [...scans].sort((a, b) => new Date(a.scan_date) - new Date(b.scan_date));
@@ -90,13 +91,15 @@ function MyScans() {
       avgDaysBetween = Math.round(totalDays / (sortedScans.length - 1));
     }
 
-    return {
+    const stats = {
       total: scans.length,
       completed: completedScans.length,
       firstScanDate: firstScan?.scan_date,
       lastScanDate: lastScan?.scan_date,
       avgDaysBetween
     };
+    console.log('Computed stats:', stats);
+    return stats;
   }, [scans]);
 
   // Prepare chart data
@@ -353,8 +356,8 @@ function MyScans() {
                   <i className="fas fa-bolt"></i>
                 </div>
                 <div className="stat-content">
-                  <span className="stat-value">{scanStats.completed}</span>
-                  <span className="stat-label">Completed Scans</span>
+                  <div className="stat-value">{scanStats.completed || 0}</div>
+                  <div className="stat-label">Completed Scans</div>
                 </div>
               </div>
 
@@ -363,8 +366,12 @@ function MyScans() {
                   <i className="fas fa-calendar-check"></i>
                 </div>
                 <div className="stat-content">
-                  <span className="stat-value">{scanStats.firstScanDate ? new Date(scanStats.firstScanDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '-'}</span>
-                  <span className="stat-label">First Scan</span>
+                  <div className="stat-value">
+                    {scanStats.firstScanDate
+                      ? new Date(scanStats.firstScanDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                      : '-'}
+                  </div>
+                  <div className="stat-label">First Scan</div>
                 </div>
               </div>
 
@@ -373,19 +380,23 @@ function MyScans() {
                   <i className="fas fa-clock"></i>
                 </div>
                 <div className="stat-content">
-                  <span className="stat-value">{scanStats.lastScanDate ? new Date(scanStats.lastScanDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '-'}</span>
-                  <span className="stat-label">Most Recent</span>
+                  <div className="stat-value">
+                    {scanStats.lastScanDate
+                      ? new Date(scanStats.lastScanDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                      : '-'}
+                  </div>
+                  <div className="stat-label">Most Recent</div>
                 </div>
               </div>
 
-              {scanStats.avgDaysBetween !== null && (
+              {scanStats.avgDaysBetween !== null && scanStats.avgDaysBetween > 0 && (
                 <div className="stat-card">
                   <div className="stat-icon avg">
                     <i className="fas fa-hourglass-half"></i>
                   </div>
                   <div className="stat-content">
-                    <span className="stat-value">{scanStats.avgDaysBetween} days</span>
-                    <span className="stat-label">Avg. Between Scans</span>
+                    <div className="stat-value">{scanStats.avgDaysBetween} days</div>
+                    <div className="stat-label">Avg. Between Scans</div>
                   </div>
                 </div>
               )}
