@@ -366,7 +366,8 @@
   border-bottom: none;
 }
 
-.scan-section h4 {
+/* Override AdminLayout.css global h4 white color */
+.admin-layout .admin-main .scan-section h4 {
   color: #1a1225 !important;
   font-size: 0.95rem;
   font-weight: 700;
