@@ -239,11 +239,17 @@ function Scans() {
                 <div className="scan-header" onClick={() => handleExpandScan(scan.id)}>
                   <div className="scan-client">
                     <div className="avatar">
-                      {scan.client_name?.split(' ').map(n => n[0]).join('') || '?'}
+                      {scan.first_name && scan.last_name
+                        ? `${scan.first_name[0]}${scan.last_name[0]}`
+                        : '?'}
                     </div>
                     <div className="client-details">
-                      <span className="client-name">{scan.client_name || 'Unknown'}</span>
-                      <span className="client-email">{scan.client_email}</span>
+                      <span className="client-name">
+                        {scan.first_name && scan.last_name
+                          ? `${scan.first_name} ${scan.last_name}`
+                          : scan.email || 'Unknown'}
+                      </span>
+                      <span className="client-email">{scan.email}</span>
                     </div>
                   </div>
                   <div className="scan-meta">
