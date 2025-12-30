@@ -24,7 +24,7 @@ function Scans() {
   const fetchScans = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await api.get('/scans/admin/all');
+      const response = await api.get('/scans');
       setScans(response.data);
       setError(null);
     } catch (err) {
