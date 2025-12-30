@@ -565,9 +565,8 @@
 .stat-value {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--portal-text, #2a1f35);
+  color: #2a1f35;
   line-height: 1.2;
-  word-break: break-word;
 }
 
 .stat-label {
