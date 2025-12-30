@@ -354,7 +354,7 @@
 .scan-expanded {
   padding: 0 1.25rem 1.25rem;
   border-top: 1px solid rgba(107, 91, 122, 0.15);
-  background: rgba(255, 255, 255, 0.5);
+  background: #f8f6f9;
 }
 
 .scan-section {
@@ -367,10 +367,12 @@
 }
 
 .scan-section h4 {
-  color: #1a1225;
-  font-size: 0.9rem;
-  font-weight: 600;
+  color: #1a1225 !important;
+  font-size: 0.95rem;
+  font-weight: 700;
   margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .section-header {
