@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const { pool, testConnection } = require('./config/database');
 const { initDb } = require('./config/initDb');
 const authRoutes = require('./routes/auth');
+const bookingsRoutes = require('./routes/bookings');
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ app.get('/api/health', (req, res) => {
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/bookings', bookingsRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
