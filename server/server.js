@@ -7,6 +7,7 @@ const authRoutes = require('./routes/auth');
 const bookingsRoutes = require('./routes/bookings');
 const scansRoutes = require('./routes/scans');
 const membershipsRoutes = require('./routes/memberships');
+const clientsRoutes = require('./routes/clients');
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/bookings', bookingsRoutes);
 app.use('/api/scans', scansRoutes);
 app.use('/api/memberships', membershipsRoutes);
+app.use('/api/clients', clientsRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
