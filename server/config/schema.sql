@@ -1,3 +1,7 @@
+-- ============================================
+-- SoulSirenSomatics Database Schema
+-- ============================================
+
 -- Users table (clients and admin)
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
@@ -33,7 +37,7 @@ CREATE TABLE IF NOT EXISTS bookings (
   time TIME NOT NULL,
   duration INTEGER DEFAULT 60,
   status VARCHAR(20) DEFAULT 'pending',
-  price DECIMAL(10,2) NOT NULL,
+  price DECIMAL(10,2),
   zoom_link VARCHAR(500),
   notes TEXT,
   calendly_event_id VARCHAR(255),
@@ -46,14 +50,12 @@ CREATE TABLE IF NOT EXISTS bookings (
 CREATE TABLE IF NOT EXISTS scans (
   id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  scan_date DATE DEFAULT CURRENT_DATE,
   status VARCHAR(20) DEFAULT 'pending',
-  report_content TEXT,
-  nervous_system_status TEXT,
-  cardiovascular_status TEXT,
-  immune_detox_status TEXT,
-  support_focus TEXT,
+  findings TEXT,
+  recommendations TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  completed_at TIMESTAMP
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Sanctuary memberships table
@@ -62,11 +64,11 @@ CREATE TABLE IF NOT EXISTS memberships (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   tier VARCHAR(20) NOT NULL,
   status VARCHAR(20) DEFAULT 'active',
-  price DECIMAL(10,2) NOT NULL,
+  start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  end_date TIMESTAMP,
   square_subscription_id VARCHAR(255),
-  started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  next_billing_date DATE,
-  cancelled_at TIMESTAMP
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Sanctuary content (videos, resources)
@@ -121,5 +123,7 @@ CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 CREATE INDEX IF NOT EXISTS idx_bookings_user_id ON bookings(user_id);
 CREATE INDEX IF NOT EXISTS idx_bookings_date ON bookings(date);
 CREATE INDEX IF NOT EXISTS idx_scans_user_id ON scans(user_id);
+CREATE INDEX IF NOT EXISTS idx_scans_scan_date ON scans(scan_date);
 CREATE INDEX IF NOT EXISTS idx_memberships_user_id ON memberships(user_id);
+CREATE INDEX IF NOT EXISTS idx_memberships_status ON memberships(status);
 CREATE INDEX IF NOT EXISTS idx_activity_log_created ON activity_log(created_at);
