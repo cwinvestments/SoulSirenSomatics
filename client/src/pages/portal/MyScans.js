@@ -7,6 +7,18 @@ import { usePortalAuth } from '../../context/PortalAuthContext';
 import api from '../../api';
 import './MyScans.css';
 
+// Get base URL for attachment images (without /api suffix)
+const API_BASE = process.env.REACT_APP_API_URL || 'https://soulsirensomatics-production.up.railway.app/api';
+const getAttachmentUrl = (attachment) => {
+  // Handle both old format (url) and new format (path)
+  if (attachment.url) return attachment.url;
+  if (attachment.path) {
+    const baseHost = API_BASE.replace(/\/api\/?$/, '');
+    return `${baseHost}${attachment.path}`;
+  }
+  return '';
+};
+
 function MyScans() {
   const { user } = usePortalAuth();
   const [expandedScan, setExpandedScan] = useState(null);
@@ -642,7 +654,7 @@ function MyScans() {
                                   }}
                                 >
                                   <img
-                                    src={attachment.url}
+                                    src={getAttachmentUrl(attachment)}
                                     alt={attachment.originalName}
                                     loading="lazy"
                                   />
@@ -652,7 +664,7 @@ function MyScans() {
                                 </div>
                               ) : (
                                 <a
-                                  href={attachment.url}
+                                  href={getAttachmentUrl(attachment)}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="attachment-file"
@@ -797,7 +809,7 @@ function MyScans() {
                 <i className="fas fa-times"></i>
               </button>
               <img
-                src={lightboxImage.url}
+                src={getAttachmentUrl(lightboxImage)}
                 alt={lightboxImage.originalName}
               />
               <div className="lightbox-caption">

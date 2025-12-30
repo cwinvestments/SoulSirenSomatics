@@ -337,11 +337,11 @@ router.post('/:id/attachments', authMiddleware, upload.array('files', 5), async 
     const currentAttachments = scanResult.rows[0].attachments || [];
 
     // Create attachment records for uploaded files
-    const baseUrl = process.env.SERVER_URL || `http://localhost:${process.env.PORT || 5000}`;
+    // Store relative path - client will construct full URL
     const newAttachments = req.files.map(file => ({
       filename: file.filename,
       originalName: file.originalname,
-      url: `${baseUrl}/api/scans/${id}/attachments/${file.filename}`,
+      path: `/api/scans/${id}/attachments/${file.filename}`,
       type: file.mimetype,
       size: file.size,
       uploaded_at: new Date().toISOString()

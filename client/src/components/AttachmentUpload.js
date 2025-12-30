@@ -2,6 +2,19 @@ import React, { useState, useRef, useCallback } from 'react';
 import api from '../api';
 import './AttachmentUpload.css';
 
+// Get base URL for attachment images (without /api suffix)
+const API_BASE = process.env.REACT_APP_API_URL || 'https://soulsirensomatics-production.up.railway.app/api';
+const getAttachmentUrl = (attachment) => {
+  // Handle both old format (url) and new format (path)
+  if (attachment.url) return attachment.url;
+  if (attachment.path) {
+    // Remove /api from base URL since path already includes it
+    const baseHost = API_BASE.replace(/\/api\/?$/, '');
+    return `${baseHost}${attachment.path}`;
+  }
+  return '';
+};
+
 function AttachmentUpload({ scanId, existingAttachments = [], onUploadComplete, onDelete }) {
   const [isDragging, setIsDragging] = useState(false);
   const [previews, setPreviews] = useState([]);
@@ -161,7 +174,7 @@ function AttachmentUpload({ scanId, existingAttachments = [], onUploadComplete, 
               <div key={index} className="attachment-card">
                 {isImageFile(attachment.type) ? (
                   <div className="attachment-preview">
-                    <img src={attachment.url} alt={attachment.originalName} />
+                    <img src={getAttachmentUrl(attachment)} alt={attachment.originalName} />
                   </div>
                 ) : (
                   <div className="attachment-preview pdf">
