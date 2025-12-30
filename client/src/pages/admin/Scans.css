@@ -367,9 +367,9 @@
 }
 
 .scan-section h4 {
-  color: #2a1f35;
+  color: #1a1225;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 0.75rem;
 }
 
@@ -393,25 +393,27 @@
 
 .status-option {
   padding: 0.5rem 1rem;
-  background: rgba(107, 91, 122, 0.1);
-  border: 1px solid rgba(107, 91, 122, 0.2);
+  background: rgba(42, 31, 53, 0.08);
+  border: 1px solid rgba(42, 31, 53, 0.2);
   border-radius: 8px;
-  color: #2a1f35;
+  color: #1a1225;
   font-size: 0.85rem;
+  font-weight: 500;
   text-transform: capitalize;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .status-option:hover {
-  background: rgba(107, 91, 122, 0.2);
-  color: #2a1f35;
+  background: rgba(42, 31, 53, 0.15);
+  color: #1a1225;
 }
 
 .status-option.active {
-  background: rgba(157, 122, 157, 0.25);
-  border-color: #9d7a9d;
-  color: #6b4a6b;
+  background: rgba(107, 74, 107, 0.2);
+  border-color: #6b4a6b;
+  color: #4a2a4a;
+  font-weight: 600;
 }
 
 .status-option:disabled {
@@ -434,13 +436,14 @@
 }
 
 .edit-btn {
-  background: rgba(107, 91, 122, 0.15);
-  border: 1px solid rgba(107, 91, 122, 0.3);
-  color: #6b5b7a;
+  background: rgba(42, 31, 53, 0.12);
+  border: 1px solid rgba(42, 31, 53, 0.25);
+  color: #2a1f35;
+  font-weight: 500;
 }
 
 .edit-btn:hover {
-  background: rgba(107, 91, 122, 0.25);
+  background: rgba(42, 31, 53, 0.2);
 }
 
 .edit-actions {
@@ -459,14 +462,14 @@
 }
 
 .cancel-btn {
-  background: rgba(107, 91, 122, 0.1);
-  border: 1px solid rgba(107, 91, 122, 0.2);
-  color: #6b5b7a;
+  background: rgba(42, 31, 53, 0.08);
+  border: 1px solid rgba(42, 31, 53, 0.2);
+  color: #4a3a5a;
 }
 
 .cancel-btn:hover {
-  background: rgba(107, 91, 122, 0.2);
-  color: #2a1f35;
+  background: rgba(42, 31, 53, 0.15);
+  color: #1a1225;
 }
 
 /* Notes */
@@ -489,7 +492,7 @@
 }
 
 .notes-input::placeholder {
-  color: #9a8a9f;
+  color: #5a4a6a;
 }
 
 .notes-display {
@@ -503,7 +506,7 @@
 }
 
 .no-notes {
-  color: #9a8a9f;
+  color: #4a3a5a;
   font-style: italic;
 }
 
