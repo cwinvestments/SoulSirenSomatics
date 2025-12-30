@@ -202,7 +202,7 @@
 .booking-actions {
   display: flex;
   gap: 1rem;
-  justify-content: flex-end;
+  justify-content: flex-start;
   padding-top: 1.25rem;
   border-top: 1px solid rgba(42, 31, 53, 0.1);
 }
@@ -234,6 +234,10 @@
   color: #2a1f35;
 }
 
+.action-btn.primary i {
+  color: #2a1f35;
+}
+
 .action-btn.primary:hover {
   box-shadow: 0 3px 10px rgba(212, 175, 125, 0.3);
 }
@@ -243,12 +247,20 @@
   color: #2a1f35;
 }
 
+.action-btn.secondary i {
+  color: #9b7bb8;
+}
+
 .action-btn.secondary:hover {
   background: #f0ebe5;
 }
 
 .action-btn.danger {
   background: rgba(233, 69, 96, 0.1);
+  color: #e94560;
+}
+
+.action-btn.danger i {
   color: #e94560;
 }
 
