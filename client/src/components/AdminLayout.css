@@ -173,6 +173,28 @@
   background: var(--admin-bg-dark);
 }
 
+/* Admin Text Colors - High Specificity to Override Any Conflicts */
+/* Ensures light text on dark admin background */
+.admin-layout .admin-main h1 {
+  color: #f4e8dc !important;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.admin-layout .admin-main h2,
+.admin-layout .admin-main h3,
+.admin-layout .admin-main h4 {
+  color: #ffffff !important;
+}
+
+.admin-layout .admin-main .page-header p,
+.admin-layout .admin-main .header-content p {
+  color: #d4af7d !important;
+}
+
+.admin-layout .admin-main .subtitle {
+  color: #d4af7d !important;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .admin-mobile-header {
