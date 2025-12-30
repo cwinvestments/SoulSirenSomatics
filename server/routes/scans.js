@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { pool } = require('../config/database');
 const authMiddleware = require('../middleware/auth');
+const { sendScanReadyEmail } = require('../utils/email');
 
 // Helper: Check if user is admin
 const isAdmin = (user) => user && user.role === 'admin';
@@ -90,7 +91,7 @@ router.post('/', authMiddleware, async (req, res) => {
       return res.status(403).json({ error: { message: 'Admin access required' } });
     }
 
-    const { user_id, scan_date, findings, recommendations } = req.body;
+    const { user_id, scan_date, findings, recommendations, status } = req.body;
 
     // Validate required fields
     if (!user_id || !scan_date) {
@@ -99,21 +100,44 @@ router.post('/', authMiddleware, async (req, res) => {
       });
     }
 
-    // Verify user exists
-    const userCheck = await pool.query('SELECT id FROM users WHERE id = $1', [user_id]);
+    // Validate status if provided
+    const validStatuses = ['pending', 'in-progress', 'completed'];
+    const scanStatus = status && validStatuses.includes(status) ? status : 'pending';
+
+    // Verify user exists and get their info for email
+    const userCheck = await pool.query(
+      'SELECT id, email, first_name, last_name FROM users WHERE id = $1',
+      [user_id]
+    );
     if (userCheck.rows.length === 0) {
       return res.status(400).json({ error: { message: 'User not found' } });
     }
 
+    const user = userCheck.rows[0];
+
     const result = await pool.query(`
       INSERT INTO scans (user_id, scan_date, findings, recommendations, status)
-      VALUES ($1, $2, $3, $4, 'pending')
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING *
-    `, [user_id, scan_date, findings || null, recommendations || null]);
+    `, [user_id, scan_date, findings || null, recommendations || null, scanStatus]);
+
+    const createdScan = result.rows[0];
+
+    // Send email notification if scan is created as completed
+    if (scanStatus === 'completed') {
+      try {
+        const userName = user.first_name || user.email.split('@')[0];
+        await sendScanReadyEmail(user.email, userName, scan_date);
+        console.log(`[Scans] Email notification sent for new completed scan ID: ${createdScan.id}`);
+      } catch (emailError) {
+        // Log error but don't fail the request
+        console.error('[Scans] Failed to send email notification:', emailError.message);
+      }
+    }
 
     res.status(201).json({
       message: 'Scan created successfully',
-      scan: result.rows[0]
+      scan: createdScan
     });
   } catch (error) {
     console.error('Error creating scan:', error);
@@ -131,12 +155,20 @@ router.put('/:id', authMiddleware, async (req, res) => {
     const { id } = req.params;
     const { findings, recommendations, status } = req.body;
 
-    // Check if scan exists
-    const existingResult = await pool.query('SELECT * FROM scans WHERE id = $1', [id]);
+    // Check if scan exists and get current status + user info
+    const existingResult = await pool.query(`
+      SELECT s.*, u.email, u.first_name, u.last_name
+      FROM scans s
+      LEFT JOIN users u ON s.user_id = u.id
+      WHERE s.id = $1
+    `, [id]);
 
     if (existingResult.rows.length === 0) {
       return res.status(404).json({ error: { message: 'Scan not found' } });
     }
+
+    const existingScan = existingResult.rows[0];
+    const previousStatus = existingScan.status;
 
     // Build dynamic update query
     const updates = [];
@@ -180,9 +212,23 @@ router.put('/:id', authMiddleware, async (req, res) => {
       RETURNING *
     `, values);
 
+    const updatedScan = result.rows[0];
+
+    // Send email notification if status changed to completed
+    if (status === 'completed' && previousStatus !== 'completed' && existingScan.email) {
+      try {
+        const userName = existingScan.first_name || existingScan.email.split('@')[0];
+        await sendScanReadyEmail(existingScan.email, userName, existingScan.scan_date);
+        console.log(`[Scans] Email notification sent for completed scan ID: ${id}`);
+      } catch (emailError) {
+        // Log error but don't fail the request
+        console.error('[Scans] Failed to send email notification:', emailError.message);
+      }
+    }
+
     res.json({
       message: 'Scan updated successfully',
-      scan: result.rows[0]
+      scan: updatedScan
     });
   } catch (error) {
     console.error('Error updating scan:', error);
