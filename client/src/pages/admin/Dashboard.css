@@ -140,19 +140,20 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.03);
+  background: #ffffff;
   border-radius: 10px;
   transition: background 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .activity-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: #f8f5f2;
 }
 
 .activity-icon {
   width: 40px;
   height: 40px;
-  background: rgba(212, 175, 125, 0.1);
+  background: rgba(212, 175, 125, 0.15);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -171,12 +172,12 @@
 .activity-action {
   font-size: 0.9rem;
   font-weight: 500;
-  color: #ffffff !important;
+  color: #2a1f35 !important;
 }
 
 .activity-detail {
   font-size: 0.85rem;
-  color: #a0aec0;
+  color: #6b5b7a;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -184,7 +185,7 @@
 
 .activity-time {
   font-size: 0.8rem;
-  color: #8892a6;
+  color: #9b7bb8;
   white-space: nowrap;
 }
 
