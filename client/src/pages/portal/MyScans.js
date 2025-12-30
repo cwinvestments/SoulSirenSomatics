@@ -7,14 +7,24 @@ import { usePortalAuth } from '../../context/PortalAuthContext';
 import api from '../../api';
 import './MyScans.css';
 
-// Get base URL for attachment images (without /api suffix)
+// Get base URL for attachment images
 const API_BASE = process.env.REACT_APP_API_URL || 'https://soulsirensomatics-production.up.railway.app/api';
+const BASE_HOST = API_BASE.replace(/\/api\/?$/, '');
+
 const getAttachmentUrl = (attachment) => {
-  // Handle both old format (url) and new format (path)
-  if (attachment.url) return attachment.url;
+  // Prefer path (new format), construct full URL
   if (attachment.path) {
-    const baseHost = API_BASE.replace(/\/api\/?$/, '');
-    return `${baseHost}${attachment.path}`;
+    return `${BASE_HOST}${attachment.path}`;
+  }
+  // For old format with url, extract path and reconstruct with correct host
+  if (attachment.url) {
+    try {
+      const urlObj = new URL(attachment.url);
+      return `${BASE_HOST}${urlObj.pathname}`;
+    } catch {
+      // If URL parsing fails, return as-is
+      return attachment.url;
+    }
   }
   return '';
 };
