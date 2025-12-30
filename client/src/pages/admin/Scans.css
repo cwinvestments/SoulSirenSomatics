@@ -286,12 +286,12 @@
 
 .scan-card .client-name {
   font-weight: 500;
-  color: #e8d5c4;
+  color: #ffffff;
 }
 
 .client-email {
   font-size: 0.8rem;
-  color: rgba(232, 213, 196, 0.6);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .scan-meta {
