@@ -321,6 +321,20 @@
   margin-top: var(--header-height);
   padding: 2rem;
   min-height: calc(100vh - var(--header-height));
+  color: var(--portal-text);
+}
+
+/* Ensure all text in portal pages is dark */
+.portal-main h1,
+.portal-main h2,
+.portal-main h3,
+.portal-main h4 {
+  color: var(--portal-text);
+}
+
+.portal-main p,
+.portal-main span {
+  color: var(--portal-text-light);
 }
 
 /* Mobile Bottom Navigation */
