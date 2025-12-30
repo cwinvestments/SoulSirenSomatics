@@ -74,7 +74,6 @@ function MyScans() {
 
   // Compute scan statistics
   const scanStats = useMemo(() => {
-    console.log('Computing scanStats, scans:', scans);
     if (!scans || scans.length === 0) return null;
 
     const completedScans = scans.filter(s => s.status === 'completed');
@@ -91,15 +90,13 @@ function MyScans() {
       avgDaysBetween = Math.round(totalDays / (sortedScans.length - 1));
     }
 
-    const stats = {
+    return {
       total: scans.length,
       completed: completedScans.length,
       firstScanDate: firstScan?.scan_date,
       lastScanDate: lastScan?.scan_date,
       avgDaysBetween
     };
-    console.log('Computed stats:', stats);
-    return stats;
   }, [scans]);
 
   // Prepare chart data
