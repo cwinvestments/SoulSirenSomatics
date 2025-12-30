@@ -405,6 +405,143 @@
   left: 25px;
 }
 
+/* Loading State */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 16px;
+  gap: 1rem;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(155, 123, 184, 0.2);
+  border-top-color: #9b7bb8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-state p {
+  color: #6b5b7a;
+  font-size: 0.95rem;
+}
+
+/* Error State */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 16px;
+  gap: 1rem;
+  text-align: center;
+}
+
+.error-state > i {
+  font-size: 2.5rem;
+  color: #e94560;
+}
+
+.error-state p {
+  color: #6b5b7a;
+  font-size: 0.95rem;
+}
+
+.retry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #f8f5f2;
+  border: none;
+  border-radius: 25px;
+  color: #2a1f35;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.retry-btn:hover {
+  background: #f0ebe5;
+}
+
+/* Error Message (inline) */
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(233, 69, 96, 0.1);
+  border-radius: 8px;
+  color: #e94560;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.error-message i {
+  font-size: 1rem;
+}
+
+/* Disabled Input */
+.disabled-input {
+  background: #f5f3f7 !important;
+  color: #6b5b7a !important;
+  cursor: not-allowed;
+}
+
+.input-hint {
+  display: block;
+  font-size: 0.75rem;
+  color: #9b7bb8;
+  margin-top: 0.25rem;
+}
+
+/* Button Disabled State */
+.save-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* New Tier Badges */
+.member-badge.tier-free {
+  background: rgba(180, 180, 180, 0.15);
+  color: #888;
+}
+
+.member-badge.tier-seeker {
+  background: rgba(212, 175, 125, 0.15);
+  color: #d4af7d;
+}
+
+.member-badge.tier-siren {
+  background: rgba(155, 123, 184, 0.15);
+  color: #9b7bb8;
+}
+
+.current-tier.tier-free {
+  background: rgba(180, 180, 180, 0.1);
+}
+
+.current-tier.tier-seeker {
+  background: rgba(212, 175, 125, 0.1);
+}
+
+.current-tier.tier-siren {
+  background: rgba(155, 123, 184, 0.1);
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .profile-header {

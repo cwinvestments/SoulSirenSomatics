@@ -245,4 +245,45 @@ router.get('/me', authMiddleware, async (req, res, next) => {
   }
 });
 
+// PUT /api/auth/profile - Update user profile (protected)
+router.put('/profile', authMiddleware, async (req, res, next) => {
+  try {
+    const { first_name, last_name, phone } = req.body;
+
+    // Update user profile
+    const result = await pool.query(
+      `UPDATE users
+       SET first_name = COALESCE($1, first_name),
+           last_name = COALESCE($2, last_name),
+           phone = COALESCE($3, phone),
+           updated_at = NOW()
+       WHERE id = $4
+       RETURNING id, email, first_name, last_name, phone, created_at`,
+      [first_name, last_name, phone, req.user.userId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        error: { message: 'User not found' }
+      });
+    }
+
+    const user = result.rows[0];
+
+    res.json({
+      message: 'Profile updated successfully',
+      user: {
+        id: user.id,
+        email: user.email,
+        firstName: user.first_name,
+        lastName: user.last_name,
+        phone: user.phone,
+        createdAt: user.created_at
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

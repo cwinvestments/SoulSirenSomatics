@@ -1,47 +1,101 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PortalLayout from '../../components/PortalLayout';
 import { usePortalAuth } from '../../context/PortalAuthContext';
+import api from '../../api';
 import './MyProfile.css';
 
 function MyProfile() {
   const { user, updateUser } = usePortalAuth();
-  const [profileData, setProfileData] = useState({
-    firstName: user?.firstName || '',
-    lastName: user?.lastName || '',
-    email: user?.email || '',
-    phone: user?.phone || '',
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
+    phone: ''
   });
+
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
     newPassword: '',
     confirmPassword: '',
   });
+  const [passwordStatus, setPasswordStatus] = useState(null);
+
   const [notifications, setNotifications] = useState({
     bookingReminders: true,
     sanctuaryUpdates: true,
     promotions: false,
   });
-  const [saveStatus, setSaveStatus] = useState(null);
 
-  const handleProfileChange = (e) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
+  const fetchProfile = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await api.get('/auth/me');
+      const userData = response.data.user;
+      setProfile(userData);
+      setFormData({
+        first_name: userData.firstName || '',
+        last_name: userData.lastName || '',
+        phone: userData.phone || ''
+      });
+    } catch (err) {
+      console.error('Error fetching profile:', err);
+      setError('Failed to load profile. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setProfileData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
+    setSuccess(false);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setSaving(true);
+      setSuccess(false);
+      setError(null);
+
+      const response = await api.put('/auth/profile', formData);
+      const updatedUser = response.data.user;
+
+      setProfile(updatedUser);
+
+      // Update the auth context with new user data
+      if (updateUser) {
+        updateUser({
+          firstName: updatedUser.firstName,
+          lastName: updatedUser.lastName,
+          phone: updatedUser.phone
+        });
+      }
+
+      setSuccess(true);
+      setTimeout(() => setSuccess(false), 3000);
+    } catch (err) {
+      console.error('Error saving profile:', err);
+      setError('Failed to save profile. Please try again.');
+    } finally {
+      setSaving(false);
+    }
   };
 
   const handlePasswordChange = (e) => {
     const { name, value } = e.target;
     setPasswordData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleNotificationChange = (key) => {
-    setNotifications(prev => ({ ...prev, [key]: !prev[key] }));
-  };
-
-  const saveProfile = () => {
-    updateUser(profileData);
-    setSaveStatus('profile');
-    setTimeout(() => setSaveStatus(null), 3000);
   };
 
   const savePassword = (e) => {
@@ -50,21 +104,66 @@ function MyProfile() {
       alert('Passwords do not match');
       return;
     }
-    // In real app, would validate current password and update
-    setSaveStatus('password');
+    // TODO: Implement password change API
+    setPasswordStatus('success');
     setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
-    setTimeout(() => setSaveStatus(null), 3000);
+    setTimeout(() => setPasswordStatus(null), 3000);
+  };
+
+  const handleNotificationChange = (key) => {
+    setNotifications(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
   const getInitials = () => {
-    return `${user?.firstName?.[0] || ''}${user?.lastName?.[0] || ''}`;
+    const firstName = profile?.firstName || user?.firstName || '';
+    const lastName = profile?.lastName || user?.lastName || '';
+    return `${firstName[0] || ''}${lastName[0] || ''}`;
   };
 
   const getTierName = () => {
     if (!user?.membershipTier) return null;
-    if (user.membershipTier === 'inner-circle') return 'Inner Circle';
-    return user.membershipTier.charAt(0).toUpperCase() + user.membershipTier.slice(1);
+    switch (user.membershipTier) {
+      case 'free':
+        return 'Observer';
+      case 'seeker':
+        return 'Seeker';
+      case 'siren':
+        return 'Siren';
+      case 'inner-circle':
+        return 'Inner Circle';
+      default:
+        return user.membershipTier.charAt(0).toUpperCase() + user.membershipTier.slice(1);
+    }
   };
+
+  if (loading) {
+    return (
+      <PortalLayout>
+        <div className="my-profile">
+          <div className="loading-state">
+            <div className="loading-spinner"></div>
+            <p>Loading your profile...</p>
+          </div>
+        </div>
+      </PortalLayout>
+    );
+  }
+
+  if (error && !profile) {
+    return (
+      <PortalLayout>
+        <div className="my-profile">
+          <div className="error-state">
+            <i className="fas fa-exclamation-circle"></i>
+            <p>{error}</p>
+            <button onClick={fetchProfile} className="retry-btn">
+              <i className="fas fa-redo"></i> Try Again
+            </button>
+          </div>
+        </div>
+      </PortalLayout>
+    );
+  }
 
   return (
     <PortalLayout>
@@ -73,8 +172,8 @@ function MyProfile() {
         <div className="profile-header">
           <div className="avatar-large">{getInitials()}</div>
           <div className="profile-info">
-            <h1>{user?.firstName} {user?.lastName}</h1>
-            <p>{user?.email}</p>
+            <h1>{profile?.firstName} {profile?.lastName}</h1>
+            <p>{profile?.email}</p>
             {user?.membershipTier && (
               <span className={`member-badge tier-${user.membershipTier}`}>
                 <i className="fas fa-heart"></i>
@@ -91,55 +190,67 @@ function MyProfile() {
               <h2><i className="fas fa-user"></i> Edit Profile</h2>
             </div>
             <div className="card-body">
-              {saveStatus === 'profile' && (
+              {success && (
                 <div className="success-message">
                   <i className="fas fa-check-circle"></i>
                   Profile updated successfully!
                 </div>
               )}
-              <div className="form-row">
-                <div className="form-group">
-                  <label>First Name</label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={profileData.firstName}
-                    onChange={handleProfileChange}
-                  />
+              {error && profile && (
+                <div className="error-message">
+                  <i className="fas fa-exclamation-circle"></i>
+                  {error}
+                </div>
+              )}
+              <form onSubmit={handleSubmit}>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>First Name</label>
+                    <input
+                      type="text"
+                      name="first_name"
+                      value={formData.first_name}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Last Name</label>
+                    <input
+                      type="text"
+                      name="last_name"
+                      value={formData.last_name}
+                      onChange={handleChange}
+                    />
+                  </div>
                 </div>
                 <div className="form-group">
-                  <label>Last Name</label>
+                  <label>Email Address</label>
                   <input
-                    type="text"
-                    name="lastName"
-                    value={profileData.lastName}
-                    onChange={handleProfileChange}
+                    type="email"
+                    value={profile?.email || ''}
+                    disabled
+                    className="disabled-input"
+                  />
+                  <span className="input-hint">Email cannot be changed</span>
+                </div>
+                <div className="form-group">
+                  <label>Phone Number</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="(555) 123-4567"
                   />
                 </div>
-              </div>
-              <div className="form-group">
-                <label>Email Address</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={profileData.email}
-                  onChange={handleProfileChange}
-                />
-              </div>
-              <div className="form-group">
-                <label>Phone Number</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={profileData.phone}
-                  onChange={handleProfileChange}
-                  placeholder="(555) 123-4567"
-                />
-              </div>
-              <button className="save-btn" onClick={saveProfile}>
-                <i className="fas fa-save"></i>
-                Save Changes
-              </button>
+                <button type="submit" className="save-btn" disabled={saving}>
+                  {saving ? (
+                    <><i className="fas fa-spinner fa-spin"></i> Saving...</>
+                  ) : (
+                    <><i className="fas fa-save"></i> Save Changes</>
+                  )}
+                </button>
+              </form>
             </div>
           </div>
 
@@ -149,7 +260,7 @@ function MyProfile() {
               <h2><i className="fas fa-lock"></i> Change Password</h2>
             </div>
             <div className="card-body">
-              {saveStatus === 'password' && (
+              {passwordStatus === 'success' && (
                 <div className="success-message">
                   <i className="fas fa-check-circle"></i>
                   Password updated successfully!
