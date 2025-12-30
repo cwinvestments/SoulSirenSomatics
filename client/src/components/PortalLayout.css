@@ -23,6 +23,7 @@
   min-height: 100vh;
   background: var(--portal-bg);
   font-family: 'Raleway', sans-serif;
+  color: var(--portal-text);
 }
 
 /* Header */

@@ -563,12 +563,11 @@
 }
 
 .stat-value {
-  font-size: 1.25rem !important;
-  font-weight: 700 !important;
-  color: #2a1f35 !important;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--portal-text, #2a1f35);
   line-height: 1.2;
   word-break: break-word;
-  display: block;
 }
 
 .stat-label {
