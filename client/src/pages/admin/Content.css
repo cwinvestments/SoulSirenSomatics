@@ -181,10 +181,10 @@
   flex-direction: column;
 }
 
-.stat-value {
+.content-page .stat-value {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #ffffff !important;
+  color: #ffffff;
   line-height: 1.2;
 }
 
