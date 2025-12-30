@@ -203,16 +203,17 @@
   align-items: center;
   gap: 0.5rem;
   padding: 1.25rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 12px;
-  color: #ffffff;
+  color: #2a1f35;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .action-btn:hover {
-  background: rgba(212, 175, 125, 0.1);
+  background: #f8f5f2;
   border-color: rgba(212, 175, 125, 0.3);
 }
 
@@ -223,6 +224,8 @@
 
 .action-btn span {
   font-size: 0.85rem;
+  color: #2a1f35 !important;
+  font-weight: 500;
 }
 
 /* Upcoming Section */
@@ -230,7 +233,7 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.1rem;
   font-weight: 500;
-  color: #ffffff !important;
+  color: #2a1f35 !important;
   margin-bottom: 1rem;
 }
 
@@ -244,14 +247,15 @@
   display: flex;
   gap: 1rem;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.03);
+  background: #ffffff;
   border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .upcoming-time {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #d4af7d;
+  color: #9b7bb8;
   white-space: nowrap;
 }
 
@@ -262,12 +266,13 @@
 
 .upcoming-client {
   font-size: 0.9rem;
-  color: #ffffff !important;
+  color: #2a1f35 !important;
+  font-weight: 500;
 }
 
 .upcoming-service {
   font-size: 0.8rem;
-  color: #a0aec0;
+  color: #6b5b7a;
 }
 
 /* Mobile Responsive */
