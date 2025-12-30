@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import PortalLayout from '../../components/PortalLayout';
-import { usePortalAuth } from '../../context/PortalAuthContext';
 import api from '../../api';
 import './MySanctuary.css';
 
 function MySanctuary() {
-  const { user } = usePortalAuth();
   const [membership, setMembership] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,7 +19,9 @@ function MySanctuary() {
       setLoading(true);
       setError(null);
       const response = await api.get('/memberships/my');
-      setMembership(response.data);
+      // Handle both direct object and object with membership property
+      const membershipData = response.data?.membership || response.data;
+      setMembership(membershipData);
     } catch (err) {
       // 404 means no membership, which is okay
       if (err.response?.status === 404) {
@@ -40,7 +39,9 @@ function MySanctuary() {
     try {
       setJoining(true);
       const response = await api.post('/memberships', { tier });
-      setMembership(response.data);
+      // Handle both direct object and object with membership property
+      const membershipData = response.data?.membership || response.data;
+      setMembership(membershipData);
     } catch (err) {
       console.error('Error joining membership:', err);
       alert('Failed to join membership. Please try again.');

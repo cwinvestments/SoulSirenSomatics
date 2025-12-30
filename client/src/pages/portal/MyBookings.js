@@ -20,7 +20,9 @@ function MyBookings() {
       setLoading(true);
       setError(null);
       const response = await api.get('/bookings/my');
-      setBookings(response.data);
+      // Handle both array and object with data property
+      const bookingsData = Array.isArray(response.data) ? response.data : (response.data?.bookings || response.data?.data || []);
+      setBookings(bookingsData);
     } catch (err) {
       console.error('Error fetching bookings:', err);
       setError('Failed to load bookings. Please try again.');

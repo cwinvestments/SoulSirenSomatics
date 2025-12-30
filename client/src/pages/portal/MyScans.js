@@ -20,7 +20,9 @@ function MyScans() {
       setLoading(true);
       setError(null);
       const response = await api.get('/scans/my');
-      setScans(response.data);
+      // Handle both array and object with data property
+      const scansData = Array.isArray(response.data) ? response.data : (response.data?.scans || response.data?.data || []);
+      setScans(scansData);
     } catch (err) {
       console.error('Error fetching scans:', err);
       setError('Failed to load your scans. Please try again.');

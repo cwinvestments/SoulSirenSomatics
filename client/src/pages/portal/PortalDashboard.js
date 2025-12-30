@@ -34,10 +34,14 @@ function PortalDashboard() {
         })
       ]);
 
+      // Handle both array and object with data property
+      const bookingsData = Array.isArray(bookingsRes.data) ? bookingsRes.data : (bookingsRes.data?.bookings || bookingsRes.data?.data || []);
+      const scansData = Array.isArray(scansRes.data) ? scansRes.data : (scansRes.data?.scans || scansRes.data?.data || []);
+
       // Filter upcoming bookings (status != cancelled, date >= today)
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      const upcomingBookings = (bookingsRes.data || [])
+      const upcomingBookings = bookingsData
         .filter(booking => {
           if (booking.status === 'cancelled' || booking.status === 'completed') return false;
           const bookingDate = new Date(booking.date);
@@ -46,7 +50,7 @@ function PortalDashboard() {
         .sort((a, b) => new Date(a.date) - new Date(b.date));
 
       // Get recent scans (limit to 3)
-      const recentScans = (scansRes.data || [])
+      const recentScans = scansData
         .sort((a, b) => new Date(b.scan_date) - new Date(a.scan_date))
         .slice(0, 3);
 
