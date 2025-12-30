@@ -13,6 +13,9 @@ function MyScans() {
   const [scans, setScans] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [compareMode, setCompareMode] = useState(false);
+  const [selectedScans, setSelectedScans] = useState([]);
+  const [showCompareModal, setShowCompareModal] = useState(false);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -71,6 +74,51 @@ function MyScans() {
         return 'pending';
     }
   };
+
+  // Get completed scans for comparison
+  const completedScans = useMemo(() => {
+    return scans.filter(s => s.status === 'completed');
+  }, [scans]);
+
+  // Handle scan selection for comparison
+  const toggleScanSelection = (scan) => {
+    if (selectedScans.find(s => s.id === scan.id)) {
+      setSelectedScans(selectedScans.filter(s => s.id !== scan.id));
+    } else if (selectedScans.length < 2) {
+      const newSelected = [...selectedScans, scan];
+      setSelectedScans(newSelected);
+      // Auto-open compare modal when 2 scans are selected
+      if (newSelected.length === 2) {
+        setShowCompareModal(true);
+      }
+    }
+  };
+
+  // Exit compare mode
+  const exitCompareMode = () => {
+    setCompareMode(false);
+    setSelectedScans([]);
+    setShowCompareModal(false);
+  };
+
+  // Get comparison data (sorted by date)
+  const comparisonData = useMemo(() => {
+    if (selectedScans.length !== 2) return null;
+
+    const sorted = [...selectedScans].sort((a, b) =>
+      new Date(a.scan_date) - new Date(b.scan_date)
+    );
+
+    const daysBetween = Math.ceil(
+      (new Date(sorted[1].scan_date) - new Date(sorted[0].scan_date)) / (1000 * 60 * 60 * 24)
+    );
+
+    return {
+      earlier: sorted[0],
+      later: sorted[1],
+      daysBetween
+    };
+  }, [selectedScans]);
 
   // Compute scan statistics
   const scanStats = useMemo(() => {
@@ -327,11 +375,42 @@ function MyScans() {
             <h1 style={{ color: '#2a1f35' }}>My Energetic Scans</h1>
             <p style={{ color: '#6b5b7a' }}>View your personalized scan reports</p>
           </div>
-          <Link to="/book" className="request-btn">
-            <i className="fas fa-plus"></i>
-            Request New Scan
-          </Link>
+          <div className="header-actions">
+            {completedScans.length >= 2 && !compareMode && (
+              <button
+                className="compare-btn"
+                onClick={() => setCompareMode(true)}
+              >
+                <i className="fas fa-columns"></i>
+                Compare Scans
+              </button>
+            )}
+            {compareMode && (
+              <button
+                className="cancel-compare-btn"
+                onClick={exitCompareMode}
+              >
+                <i className="fas fa-times"></i>
+                Cancel Compare
+              </button>
+            )}
+            <Link to="/book" className="request-btn">
+              <i className="fas fa-plus"></i>
+              Request New Scan
+            </Link>
+          </div>
         </div>
+
+        {/* Compare Mode Banner */}
+        {compareMode && (
+          <div className="compare-mode-banner">
+            <i className="fas fa-info-circle"></i>
+            <p>
+              Select 2 completed scans to compare.
+              <strong> {selectedScans.length}/2 selected</strong>
+            </p>
+          </div>
+        )}
 
         {/* Info Banner */}
         <div className="info-banner">
@@ -452,13 +531,32 @@ function MyScans() {
               </Link>
             </div>
           ) : (
-            scans.map((scan) => (
-              <div key={scan.id} className={`scan-card ${expandedScan === scan.id ? 'expanded' : ''}`}>
+            scans.map((scan) => {
+              const isSelected = selectedScans.find(s => s.id === scan.id);
+              const isSelectable = compareMode && scan.status === 'completed';
+
+              return (
+              <div
+                key={scan.id}
+                className={`scan-card ${expandedScan === scan.id ? 'expanded' : ''} ${isSelected ? 'selected' : ''} ${isSelectable ? 'selectable' : ''}`}
+              >
                 <div
                   className="scan-header"
-                  onClick={() => scan.status === 'completed' && toggleScan(scan.id)}
+                  onClick={() => {
+                    if (compareMode && scan.status === 'completed') {
+                      toggleScanSelection(scan);
+                    } else if (scan.status === 'completed') {
+                      toggleScan(scan.id);
+                    }
+                  }}
                   style={{ cursor: scan.status === 'completed' ? 'pointer' : 'default' }}
                 >
+                  {/* Selection Checkbox */}
+                  {compareMode && scan.status === 'completed' && (
+                    <div className={`selection-checkbox ${isSelected ? 'checked' : ''}`}>
+                      {isSelected && <i className="fas fa-check"></i>}
+                    </div>
+                  )}
                   <div className="scan-info">
                     <div className="scan-icon">
                       <i className="fas fa-bolt"></i>
@@ -475,7 +573,7 @@ function MyScans() {
                     <span className={`status-badge ${getStatusClass(scan.status)}`}>
                       {getStatusBadge(scan.status)}
                     </span>
-                    {scan.status === 'completed' && (
+                    {scan.status === 'completed' && !compareMode && (
                       <button className="expand-btn">
                         <i className={`fas fa-chevron-${expandedScan === scan.id ? 'up' : 'down'}`}></i>
                       </button>
@@ -544,9 +642,87 @@ function MyScans() {
                   </div>
                 )}
               </div>
-            ))
+              );
+            })
           )}
         </div>
+
+        {/* Comparison Modal */}
+        {showCompareModal && comparisonData && (
+          <div className="compare-modal-overlay" onClick={() => setShowCompareModal(false)}>
+            <div className="compare-modal" onClick={(e) => e.stopPropagation()}>
+              <div className="compare-modal-header">
+                <div className="compare-header-content">
+                  <h2><i className="fas fa-columns"></i> Scan Comparison</h2>
+                  <p className="time-between">
+                    <i className="fas fa-clock"></i>
+                    {comparisonData.daysBetween} days between scans
+                  </p>
+                </div>
+                <button className="close-modal-btn" onClick={exitCompareMode}>
+                  <i className="fas fa-times"></i>
+                </button>
+              </div>
+
+              <div className="compare-content">
+                {/* Earlier Scan */}
+                <div className="compare-side earlier">
+                  <div className="compare-side-header">
+                    <span className="compare-label">Earlier Scan</span>
+                    <span className="compare-date">{formatDate(comparisonData.earlier.scan_date)}</span>
+                  </div>
+
+                  <div className="compare-section">
+                    <h4><i className="fas fa-search"></i> Findings</h4>
+                    <p>{comparisonData.earlier.findings || 'No findings recorded'}</p>
+                  </div>
+
+                  <div className="compare-section">
+                    <h4><i className="fas fa-star"></i> Recommendations</h4>
+                    <p>{comparisonData.earlier.recommendations || 'No recommendations recorded'}</p>
+                  </div>
+                </div>
+
+                {/* Comparison Divider */}
+                <div className="compare-divider">
+                  <div className="divider-line"></div>
+                  <div className="divider-icon">
+                    <i className="fas fa-arrow-right"></i>
+                  </div>
+                  <div className="divider-line"></div>
+                </div>
+
+                {/* Later Scan */}
+                <div className="compare-side later">
+                  <div className="compare-side-header">
+                    <span className="compare-label">Later Scan</span>
+                    <span className="compare-date">{formatDate(comparisonData.later.scan_date)}</span>
+                  </div>
+
+                  <div className="compare-section">
+                    <h4><i className="fas fa-search"></i> Findings</h4>
+                    <p>{comparisonData.later.findings || 'No findings recorded'}</p>
+                  </div>
+
+                  <div className="compare-section">
+                    <h4><i className="fas fa-star"></i> Recommendations</h4>
+                    <p>{comparisonData.later.recommendations || 'No recommendations recorded'}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="compare-modal-footer">
+                <p className="compare-disclaimer">
+                  <i className="fas fa-info-circle"></i>
+                  Use this comparison to track your healing progress over time.
+                </p>
+                <button className="close-compare-btn" onClick={exitCompareMode}>
+                  Close Comparison
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </PortalLayout>
   );

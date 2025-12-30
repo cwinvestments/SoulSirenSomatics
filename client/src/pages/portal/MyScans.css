@@ -683,6 +683,367 @@
   font-size: 1rem;
 }
 
+/* Header Actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Compare Button */
+.compare-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: linear-gradient(135deg, #9b7bb8, #7a5f99);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.compare-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(155, 123, 184, 0.3);
+}
+
+.cancel-compare-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(233, 69, 96, 0.1);
+  border: 1px solid #e94560;
+  border-radius: 25px;
+  color: #e94560;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancel-compare-btn:hover {
+  background: #e94560;
+  color: white;
+}
+
+/* Compare Mode Banner */
+.compare-mode-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, rgba(155, 123, 184, 0.15), rgba(212, 175, 125, 0.15));
+  border: 1px solid rgba(155, 123, 184, 0.3);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.compare-mode-banner i {
+  color: #9b7bb8;
+  font-size: 1.1rem;
+}
+
+.compare-mode-banner p {
+  color: #2a1f35;
+  font-size: 0.95rem;
+}
+
+.compare-mode-banner strong {
+  color: #9b7bb8;
+}
+
+/* Selection Checkbox */
+.selection-checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #9b7bb8;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  margin-right: 0.5rem;
+}
+
+.selection-checkbox.checked {
+  background: linear-gradient(135deg, #9b7bb8, #d4af7d);
+  border-color: transparent;
+}
+
+.selection-checkbox i {
+  color: white;
+  font-size: 0.75rem;
+}
+
+/* Scan Card Selection States */
+.scan-card.selectable {
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.scan-card.selectable:hover {
+  border-color: rgba(155, 123, 184, 0.3);
+  box-shadow: 0 4px 20px rgba(155, 123, 184, 0.15);
+}
+
+.scan-card.selected {
+  border: 2px solid #9b7bb8;
+  box-shadow: 0 4px 20px rgba(155, 123, 184, 0.2);
+  background: linear-gradient(135deg, rgba(155, 123, 184, 0.05), rgba(212, 175, 125, 0.05));
+}
+
+/* Compare Modal Overlay */
+.compare-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 18, 37, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+/* Compare Modal */
+.compare-modal {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.compare-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #2a1f35, #1a1225);
+  border-radius: 20px 20px 0 0;
+}
+
+.compare-header-content h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.compare-header-content h2 i {
+  color: #d4af7d;
+}
+
+.time-between {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #d4af7d;
+  font-size: 0.95rem;
+}
+
+.time-between i {
+  font-size: 0.85rem;
+}
+
+.close-modal-btn {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-modal-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+/* Compare Content */
+.compare-content {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.compare-side {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.compare-side.earlier {
+  border-top: 4px solid #9b7bb8;
+}
+
+.compare-side.later {
+  border-top: 4px solid #4ecdc4;
+}
+
+.compare-side-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(42, 31, 53, 0.1);
+}
+
+.compare-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.35rem 0.75rem;
+  border-radius: 15px;
+}
+
+.compare-side.earlier .compare-label {
+  background: rgba(155, 123, 184, 0.15);
+  color: #9b7bb8;
+}
+
+.compare-side.later .compare-label {
+  background: rgba(78, 205, 196, 0.15);
+  color: #4ecdc4;
+}
+
+.compare-date {
+  font-size: 0.9rem;
+  color: #6b5b7a;
+}
+
+.compare-section {
+  margin-bottom: 1.25rem;
+}
+
+.compare-section:last-child {
+  margin-bottom: 0;
+}
+
+.compare-section h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2a1f35;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.compare-section h4 i {
+  color: #d4af7d;
+  font-size: 0.9rem;
+}
+
+.compare-section p {
+  font-size: 0.9rem;
+  color: #6b5b7a;
+  line-height: 1.6;
+}
+
+/* Compare Divider */
+.compare-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.divider-line {
+  width: 2px;
+  flex: 1;
+  background: linear-gradient(180deg, #9b7bb8, #d4af7d, #4ecdc4);
+  border-radius: 1px;
+  min-height: 50px;
+}
+
+.divider-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #d4af7d, #e8c9a0);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(212, 175, 125, 0.3);
+}
+
+.divider-icon i {
+  color: #2a1f35;
+  font-size: 0.9rem;
+}
+
+/* Compare Modal Footer */
+.compare-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2rem;
+  background: #f8f5f2;
+  border-radius: 0 0 20px 20px;
+  border-top: 1px solid rgba(42, 31, 53, 0.1);
+}
+
+.compare-disclaimer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #6b5b7a;
+}
+
+.compare-disclaimer i {
+  color: #9b7bb8;
+}
+
+.close-compare-btn {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #2a1f35, #1a1225);
+  border: none;
+  border-radius: 25px;
+  color: #d4af7d;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close-compare-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(26, 18, 37, 0.3);
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .page-header {
@@ -690,6 +1051,13 @@
     align-items: flex-start;
   }
 
+  .header-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .compare-btn,
+  .cancel-compare-btn,
   .request-btn {
     width: 100%;
     justify-content: center;
@@ -704,5 +1072,58 @@
   .scan-actions {
     width: 100%;
     justify-content: space-between;
+  }
+
+  /* Compare Modal Mobile */
+  .compare-modal {
+    max-height: 95vh;
+    border-radius: 16px;
+  }
+
+  .compare-modal-header {
+    padding: 1.25rem 1.5rem;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .compare-header-content h2 {
+    font-size: 1.25rem;
+  }
+
+  .compare-content {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .compare-divider {
+    flex-direction: row;
+    padding: 0.5rem 0;
+  }
+
+  .divider-line {
+    width: auto;
+    height: 2px;
+    flex: 1;
+    min-height: auto;
+    background: linear-gradient(90deg, #9b7bb8, #d4af7d, #4ecdc4);
+  }
+
+  .divider-icon i {
+    transform: rotate(90deg);
+  }
+
+  .compare-modal-footer {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .compare-disclaimer {
+    justify-content: center;
+  }
+
+  .close-compare-btn {
+    width: 100%;
   }
 }
