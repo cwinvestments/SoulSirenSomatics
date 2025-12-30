@@ -467,6 +467,184 @@
   color: #3b82f6;
 }
 
+/* Progress Section */
+.progress-section {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 20px rgba(42, 31, 53, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.progress-header {
+  margin-bottom: 1.25rem;
+}
+
+.progress-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #2a1f35;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.progress-header h2 i {
+  color: #9b7bb8;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 2px 8px rgba(42, 31, 53, 0.05);
+}
+
+.stat-icon {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, rgba(155, 123, 184, 0.15), rgba(212, 175, 125, 0.15));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-icon i {
+  font-size: 1rem;
+  color: #9b7bb8;
+}
+
+.stat-icon.calendar {
+  background: linear-gradient(135deg, rgba(78, 205, 196, 0.15), rgba(155, 123, 184, 0.15));
+}
+
+.stat-icon.calendar i {
+  color: #4ecdc4;
+}
+
+.stat-icon.recent {
+  background: linear-gradient(135deg, rgba(212, 175, 125, 0.15), rgba(232, 201, 160, 0.15));
+}
+
+.stat-icon.recent i {
+  color: #d4af7d;
+}
+
+.stat-icon.avg {
+  background: linear-gradient(135deg, rgba(107, 91, 122, 0.15), rgba(155, 123, 184, 0.15));
+}
+
+.stat-icon.avg i {
+  color: #6b5b7a;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2a1f35;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #6b5b7a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Chart Container */
+.chart-container {
+  background: white;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(42, 31, 53, 0.05);
+}
+
+.chart-container h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2a1f35;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chart-container h3 i {
+  color: #d4af7d;
+  font-size: 0.9rem;
+}
+
+.chart-wrapper {
+  width: 100%;
+  height: 200px;
+}
+
+/* Chart Tooltip */
+.chart-tooltip {
+  background: rgba(26, 18, 37, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(212, 175, 125, 0.3);
+}
+
+.tooltip-date {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #d4af7d;
+  margin-bottom: 0.25rem;
+}
+
+.tooltip-status {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.15rem;
+}
+
+.tooltip-status .status-text {
+  font-weight: 600;
+}
+
+.tooltip-status .status-text.completed {
+  color: #4ecdc4;
+}
+
+.tooltip-status .status-text.pending {
+  color: #ffc107;
+}
+
+.tooltip-status .status-text.in-progress {
+  color: #3b82f6;
+}
+
+.tooltip-number {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
 /* Report Actions */
 .report-actions {
   display: flex;
