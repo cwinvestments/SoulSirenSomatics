@@ -75,10 +75,10 @@
   flex-direction: column;
 }
 
-.stat-value {
+.admin-layout .stat-value {
   font-size: 1.75rem;
   font-weight: 600;
-  color: #ffffff !important;
+  color: #ffffff;
   line-height: 1.2;
 }
 
