@@ -1,54 +1,81 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PortalLayout from '../../components/PortalLayout';
+import api from '../../api';
 import './MyBookings.css';
 
 function MyBookings() {
   const [activeTab, setActiveTab] = useState('upcoming');
+  const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const bookings = {
-    upcoming: [
-      {
-        id: 1,
-        service: '1:1 Support Session',
-        date: 'Thursday, January 30, 2025',
-        time: '2:00 PM EST',
-        status: 'confirmed',
-        zoomLink: 'https://zoom.us/j/123456789',
-      },
-      {
-        id: 2,
-        service: 'Energetic Scan',
-        date: 'Tuesday, February 4, 2025',
-        time: '10:30 AM EST',
-        status: 'confirmed',
-        zoomLink: 'https://zoom.us/j/987654321',
-      },
-    ],
-    past: [
-      {
-        id: 3,
-        service: '1:1 Support Session',
-        date: 'Monday, January 20, 2025',
-        time: '3:00 PM EST',
-        status: 'completed',
-      },
-      {
-        id: 4,
-        service: 'Energetic Scan',
-        date: 'Friday, January 10, 2025',
-        time: '11:00 AM EST',
-        status: 'completed',
-      },
-      {
-        id: 5,
-        service: 'Discovery Call',
-        date: 'Wednesday, December 18, 2024',
-        time: '2:30 PM EST',
-        status: 'completed',
-      },
-    ],
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    fetchBookings();
+  }, []);
+
+  const fetchBookings = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await api.get('/bookings/my');
+      setBookings(response.data);
+    } catch (err) {
+      console.error('Error fetching bookings:', err);
+      setError('Failed to load bookings. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const cancelBooking = async (bookingId) => {
+    if (!window.confirm('Are you sure you want to cancel this booking? This action cannot be undone.')) {
+      return;
+    }
+
+    try {
+      await api.delete(`/bookings/${bookingId}`);
+      setBookings(bookings.filter(b => b.id !== bookingId));
+    } catch (err) {
+      console.error('Error cancelling booking:', err);
+      alert('Failed to cancel booking. Please try again.');
+    }
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  const formatTime = (timeString) => {
+    // Handle time in HH:MM:SS or HH:MM format
+    const [hours, minutes] = timeString.split(':');
+    const hour = parseInt(hours, 10);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const hour12 = hour % 12 || 12;
+    return `${hour12}:${minutes} ${ampm} EST`;
+  };
+
+  const isUpcoming = (booking) => {
+    if (booking.status === 'cancelled' || booking.status === 'completed') {
+      return false;
+    }
+    const bookingDate = new Date(booking.date);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return bookingDate >= today;
+  };
+
+  const upcomingBookings = bookings.filter(isUpcoming);
+  const pastBookings = bookings.filter(b => !isUpcoming(b));
+
+  const currentBookings = activeTab === 'upcoming' ? upcomingBookings : pastBookings;
 
   const getStatusBadge = (status) => {
     switch (status) {
@@ -58,12 +85,47 @@ function MyBookings() {
         return <span className="status-badge completed"><i className="fas fa-check"></i> Completed</span>;
       case 'cancelled':
         return <span className="status-badge cancelled"><i className="fas fa-times-circle"></i> Cancelled</span>;
+      case 'pending':
+        return <span className="status-badge pending"><i className="fas fa-clock"></i> Pending</span>;
       default:
         return null;
     }
   };
 
-  const currentBookings = bookings[activeTab] || [];
+  const getServiceIcon = (serviceType) => {
+    if (serviceType.toLowerCase().includes('scan')) return 'fa-bolt';
+    if (serviceType.toLowerCase().includes('discovery')) return 'fa-phone';
+    return 'fa-user-friends';
+  };
+
+  if (loading) {
+    return (
+      <PortalLayout>
+        <div className="my-bookings">
+          <div className="loading-state">
+            <div className="loading-spinner"></div>
+            <p>Loading your bookings...</p>
+          </div>
+        </div>
+      </PortalLayout>
+    );
+  }
+
+  if (error) {
+    return (
+      <PortalLayout>
+        <div className="my-bookings">
+          <div className="error-state">
+            <i className="fas fa-exclamation-circle"></i>
+            <p>{error}</p>
+            <button onClick={fetchBookings} className="retry-btn">
+              <i className="fas fa-redo"></i> Try Again
+            </button>
+          </div>
+        </div>
+      </PortalLayout>
+    );
+  }
 
   return (
     <PortalLayout>
@@ -87,8 +149,8 @@ function MyBookings() {
             onClick={() => setActiveTab('upcoming')}
           >
             Upcoming
-            {bookings.upcoming.length > 0 && (
-              <span className="tab-count">{bookings.upcoming.length}</span>
+            {upcomingBookings.length > 0 && (
+              <span className="tab-count">{upcomingBookings.length}</span>
             )}
           </button>
           <button
@@ -124,10 +186,10 @@ function MyBookings() {
                 <div className="booking-main">
                   <div className="booking-service">
                     <div className="service-icon">
-                      <i className={`fas ${booking.service.includes('Scan') ? 'fa-bolt' : booking.service.includes('Discovery') ? 'fa-phone' : 'fa-user-friends'}`}></i>
+                      <i className={`fas ${getServiceIcon(booking.service_type)}`}></i>
                     </div>
                     <div className="service-info">
-                      <h3>{booking.service}</h3>
+                      <h3>{booking.service_type}</h3>
                       {getStatusBadge(booking.status)}
                     </div>
                   </div>
@@ -135,19 +197,32 @@ function MyBookings() {
                   <div className="booking-datetime">
                     <div className="datetime-item">
                       <i className="fas fa-calendar"></i>
-                      <span>{booking.date}</span>
+                      <span>{formatDate(booking.date)}</span>
                     </div>
                     <div className="datetime-item">
                       <i className="fas fa-clock"></i>
-                      <span>{booking.time}</span>
+                      <span>{formatTime(booking.time)}</span>
                     </div>
+                    {booking.duration && (
+                      <div className="datetime-item">
+                        <i className="fas fa-hourglass-half"></i>
+                        <span>{booking.duration} minutes</span>
+                      </div>
+                    )}
                   </div>
+
+                  {booking.notes && (
+                    <div className="booking-notes">
+                      <i className="fas fa-sticky-note"></i>
+                      <span>{booking.notes}</span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="booking-actions">
                   {booking.status === 'confirmed' && (
                     <>
-                      <a href={booking.zoomLink} target="_blank" rel="noopener noreferrer" className="action-btn primary">
+                      <a href={booking.zoom_link || '#'} target="_blank" rel="noopener noreferrer" className="action-btn primary">
                         <i className="fas fa-video"></i>
                         Join Session
                       </a>
@@ -155,17 +230,29 @@ function MyBookings() {
                         <i className="fas fa-clock"></i>
                         Reschedule
                       </button>
-                      <button className="action-btn danger">
+                      <button className="action-btn danger" onClick={() => cancelBooking(booking.id)}>
+                        <i className="fas fa-times"></i>
+                        Cancel
+                      </button>
+                    </>
+                  )}
+                  {booking.status === 'pending' && (
+                    <>
+                      <button className="action-btn secondary">
+                        <i className="fas fa-clock"></i>
+                        Reschedule
+                      </button>
+                      <button className="action-btn danger" onClick={() => cancelBooking(booking.id)}>
                         <i className="fas fa-times"></i>
                         Cancel
                       </button>
                     </>
                   )}
                   {booking.status === 'completed' && (
-                    <button className="action-btn secondary">
+                    <Link to="/book" className="action-btn secondary">
                       <i className="fas fa-redo"></i>
                       Book Again
-                    </button>
+                    </Link>
                   )}
                 </div>
               </div>
